@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={cn('bg-background text-foreground font-sans antialiased', mori.variable)}>
+			<body className={cn('bg-background/30 text-foreground font-sans antialiased', mori.variable)}>
 				{children}
 			</body>
 		</html>
