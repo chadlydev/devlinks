@@ -1,5 +1,13 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle
+} from '@/components/ui/card';
+import ThemeButton from '@/components/theme-button';
 
 export default function HomePage() {
 	return (
@@ -12,6 +20,7 @@ export default function HomePage() {
 					</CardDescription>
 				</CardHeader>
 				<CardContent className='flex flex-col gap-2'>
+					<ThemeButton />
 					<Button>Button</Button>
 					<Button variant='secondary'>Button</Button>
 					<Button variant='outline'>Button</Button>
