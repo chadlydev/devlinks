@@ -1,7 +1,14 @@
 import * as React from 'react';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
-import { Controller, ControllerProps, FieldPath, FieldValues, FormProvider, useFormContext } from 'react-hook-form';
+import {
+	Controller,
+	ControllerProps,
+	FieldPath,
+	FieldValues,
+	FormProvider,
+	useFormContext
+} from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
 
@@ -81,7 +88,7 @@ const FormLabel = React.forwardRef<
 		<LabelPrimitive.Root
 			ref={ref}
 			className={cn(
-				'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+				'text-sm font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
 				className
 			)}
 			htmlFor={formItemId}
@@ -160,7 +167,7 @@ const FormMessage = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLS
 			<span
 				ref={ref}
 				id={formMessageId}
-				className={cn('text-xs font-medium text-red-500', className)}
+				className={cn('text-xs text-red-500', className)}
 				{...props}
 			>
 				{body}
