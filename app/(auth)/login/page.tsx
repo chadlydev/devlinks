@@ -17,7 +17,7 @@ import { GithubIcon, GoogleIcon } from '@/components/icons';
 export default function LoginPage() {
 	return (
 		<main>
-			<Card>
+			<Card className='sm:w-[25rem]'>
 				<CardHeader>
 					<CardTitle>Login</CardTitle>
 					<CardDescription>Enter your details below to login to your account</CardDescription>
