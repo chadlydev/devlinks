@@ -4,7 +4,7 @@ import LoginForm from '@/app/(auth)/login/login-form';
 export default function Page() {
 	return (
 		<main>
-			<Card className=''>
+			<Card>
 				<CardHeader>
 					<CardTitle>Login</CardTitle>
 					<CardDescription>Enter your details below to login to your account</CardDescription>
