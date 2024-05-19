@@ -4,65 +4,65 @@
 
 @layer base {
 	:root {
-		--background: 0 0% 100%;
-		--foreground: 0 0% 3.9%;
+		--background: 60 8% 97%; /* sand2 */
+		--foreground: 48 8% 12%; /* sand12 */
 
-		--card: 0 0% 100%;
-		--card-foreground: 0 0% 3.9%;
+		--card: 60 20% 99%; /* sand1 */
+		--card-foreground: 48 8% 12%; /* sand12 */
 
-		--popover: 0 0% 100%;
-		--popover-foreground: 0 0% 3.9%;
+		--popover: 60 20% 99%; /* sand1 */
+		--popover-foreground: 48 8% 12%; /* sand12 */
 
-		--primary: 0 0% 9%;
-		--primary-foreground: 0 0% 98%;
+		--primary: 42 100% 62%; /* amber9 */
+		--primary-foreground: 24 40% 22%; /* amber12 */
 
-		--secondary: 0 0% 96.1%;
-		--secondary-foreground: 0 0% 9%;
+		--secondary: 52 100% 88%; /* amber3 */
+		--secondary-foreground: 24 40% 22%; /* amber12 */
 
-		--muted: 0 0% 96.1%;
-		--muted-foreground: 0 0% 45.1%;
+		--muted: 60 20% 99%; /* sand1 */
+		--muted-foreground: 60 3% 38%; /* sand11 */
 
-		--accent: 0 0% 96.1%;
-		--accent-foreground: 0 0% 9%;
+		--accent: 52 100% 88%; /* amber3 */
+		--accent-foreground: 24 40% 22%; /* amber12 */
 
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: 0 0% 98%;
+		--destructive: 10 78% 54%; /* tomato9 */
+		--destructive-foreground: 0 100% 99%; /* tomato1 */
 
-		--border: 0 0% 89.8%;
-		--input: 0 0% 89.8%;
-		--ring: 0 0% 3.9%;
+		--border: 45 5% 85%; /* sand6 */
+		--input: 45 5% 85%; /* sand6 */
+		--ring: 48 8% 12%; /* sand12 */
 
 		--radius: 0.5rem;
 	}
 
 	.dark {
-		--background: 0 0% 3.9%;
-		--foreground: 0 0% 98%;
+		--background: 60 2% 10%; /* sand2 */
+		--foreground: 60 6% 93%; /* sand12 */
 
-		--card: 0 0% 3.9%;
-		--card-foreground: 0 0% 98%;
+		--card: 60 1% 13%; /* sand3 */
+		--card-foreground: 60 6% 93%; /* sand12 */
 
-		--popover: 0 0% 3.9%;
-		--popover-foreground: 0 0% 98%;
+		--popover: 60 1% 13%; /* sand3 */
+		--popover-foreground: 60 6% 93%; /* sand12 */
 
-		--primary: 0 0% 98%;
-		--primary-foreground: 0 0% 9%;
+		--primary: 42 100% 62%; /* amber9 */
+		--primary-foreground: 24 40% 22%; /* amber12 */
 
-		--secondary: 0 0% 14.9%;
-		--secondary-foreground: 0 0% 98%;
+		--secondary: 36 71% 11%; /* amber3 */
+		--secondary-foreground: 41 100% 85%; /* amber12 */
 
-		--muted: 0 0% 14.9%;
-		--muted-foreground: 0 0% 63.9%;
+		--muted: 60 1% 13%; /* sand3 */
+		--muted-foreground: 45 5% 69%; /* sand11 */
 
-		--accent: 0 0% 14.9%;
-		--accent-foreground: 0 0% 98%;
+		--accent: 36 71% 11%; /* amber3 */
+		--accent-foreground: 41 100% 85%; /* amber12 */
 
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 0 0% 98%;
+		--destructive: 10 78% 54%; /* tomato9 */
+		--destructive-foreground: 0 100% 99%; /* tomato1 */
 
-		--border: 0 0% 14.9%;
-		--input: 0 0% 14.9%;
-		--ring: 0 0% 83.1%;
+		--border: 45 4% 22%; /* sand6 */
+		--input: 45 4% 22%; /* sand6 */
+		--ring: 60 6% 93%; /* sand12 */
 	}
 }
 
