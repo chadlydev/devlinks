@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import '../lib/globals.css';
 import { cn } from '@/lib/utils';
@@ -28,6 +28,11 @@ const mori = localFont({
 
 export const metadata: Metadata = {
 	title: 'devlinks'
+};
+
+export const viewport: Viewport = {
+	initialScale: 1,
+	userScalable: false
 };
 
 export default function RootLayout({
