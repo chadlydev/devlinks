@@ -8,10 +8,12 @@ import {
 	CardTitle
 } from '@/components/ui/card';
 import ThemeButton from '@/components/theme-button';
+import Logo from '@/components/logo';
 
 export default function HomePage() {
 	return (
 		<main>
+			<Logo />
 			<Card className='m-auto mt-20 max-w-sm'>
 				<CardHeader>
 					<CardTitle>Card</CardTitle>
@@ -23,7 +25,6 @@ export default function HomePage() {
 					<ThemeButton />
 					<Button>Button</Button>
 					<Button variant='secondary'>Button</Button>
-					<Button variant='outline'>Button</Button>
 					<Button variant='destructive'>Button</Button>
 					<Button variant='ghost'>Button</Button>
 					<Button variant='link'>Button</Button>
