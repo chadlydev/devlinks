@@ -6,7 +6,6 @@ export type IconProps = React.SVGProps<SVGSVGElement> & {
 };
 
 // Exports
-export { CommandIcon } from './command-icon';
 export { MoonIcon } from './moon-icon';
 export { SunIcon } from './sun-icon';
 export { ChevronsUpDownIcon } from './chevrons-up-down-icon';
