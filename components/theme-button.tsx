@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
-import { MoonIcon } from 'lucide-react';
+import { MoonIcon, SunIcon } from '@/components/icons';
 
 export default function ThemeButton() {
 	const { resolvedTheme, setTheme } = useTheme();
@@ -16,8 +16,8 @@ export default function ThemeButton() {
 	};
 
 	return (
-		<Button onClick={toggleTheme} size='icon'>
-			<MoonIcon />
+		<Button onClick={toggleTheme} variant='secondary' size='icon' className='size-[33.333px]'>
+			{resolvedTheme === 'light' ? <MoonIcon size={16} /> : <SunIcon size={16} />}
 		</Button>
 	);
 }
