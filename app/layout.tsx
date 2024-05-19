@@ -38,7 +38,7 @@ export default function RootLayout({
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body
-				className={cn('bg-background/30 text-foreground font-sans antialiased', mori.variable)}
+				className={cn('bg-background text-foreground font-sans antialiased', mori.variable)}
 				suppressHydrationWarning
 			>
 				<ThemeProvider
