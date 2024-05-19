@@ -24,11 +24,11 @@ export default function SignUpPage() {
 				</CardHeader>
 				<CardContent className='flex flex-col gap-6'>
 					<div className='grid gap-2'>
-						<Button variant='outline' type='button' size='sm' className='gap-2'>
+						<Button variant='outline' type='button' className='gap-2'>
 							<GoogleIcon size={16} />
 							Sign up with Google
 						</Button>
-						<Button variant='outline' type='button' size='sm' className='gap-2'>
+						<Button variant='outline' type='button' className='gap-2'>
 							<GithubIcon size={16} />
 							Sign up with GitHub
 						</Button>

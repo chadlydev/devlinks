@@ -1,11 +1,4 @@
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import LoginForm from '@/app/(auth)/login/login-form';
 import Link from 'next/link';
 import { ROUTE_SIGN_UP } from '@/lib/constants';
@@ -24,11 +17,11 @@ export default function LoginPage() {
 				</CardHeader>
 				<CardContent className='flex flex-col gap-6'>
 					<div className='grid gap-2'>
-						<Button variant='outline' type='button' size='sm' className='gap-2'>
+						<Button variant='outline' type='button' className='gap-2'>
 							<GoogleIcon size={16} />
 							Login with Google
 						</Button>
-						<Button variant='outline' type='button' size='sm' className='gap-2'>
+						<Button variant='outline' type='button' className='gap-2'>
 							<GithubIcon size={16} />
 							Login with GitHub
 						</Button>
