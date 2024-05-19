@@ -112,7 +112,7 @@ const Code = React.forwardRef<HTMLElement, CodeProps>(
 			<Comp
 				ref={ref}
 				className={cn(
-					'bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+					'bg-muted relative max-w-fit rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
 					className
 				)}
 				{...props}
