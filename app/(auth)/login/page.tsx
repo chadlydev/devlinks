@@ -1,14 +1,17 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import LoginForm from '@/app/(auth)/login/login-form';
 
 export default function Page() {
 	return (
 		<main>
-			<Card>
+			<Card className=''>
 				<CardHeader>
 					<CardTitle>Login</CardTitle>
 					<CardDescription>Enter your details below to login to your account</CardDescription>
 				</CardHeader>
-				<CardContent>{/*	Form here */}</CardContent>
+				<CardContent>
+					<LoginForm />
+				</CardContent>
 			</Card>
 		</main>
 	);
