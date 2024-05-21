@@ -1,5 +1,5 @@
 import Header from '@/app/(marketing)/header';
-import { H1, H2, Large, Lead, Muted, Small } from '@/components/typography';
+import { H1, H2, Large, Lead, Muted } from '@/components/typography';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ROUTE_SIGN_UP } from '@/lib/constants';
@@ -13,9 +13,8 @@ import {
 	StripeIcon
 } from '@/components/icons';
 import { Card, CardContent } from '@/components/ui/card';
-import { LogoIcon } from '@/components/icons/logo-icon';
 import GridBackground from '@/components/grid-background';
-import ThemeDropdownMenu from '@/components/theme-dropdown-menu';
+import Footer from '@/app/(marketing)/footer';
 
 const features = [
 	{
@@ -125,41 +124,7 @@ export default function MarketingPage() {
 				</div>
 			</section>
 
-			<footer className='container mt-auto flex flex-col items-center gap-4 px-4 py-6 text-center md:flex-row md:px-8'>
-				<LogoIcon />
-				<Small className='leading-7 md:mr-auto md:text-left'>
-					Built by{' '}
-					<Link
-						href='https://github.com/chadlydev'
-						target='_blank'
-						className='underline underline-offset-4'
-					>
-						chadlydev
-					</Link>
-					. Inspired by{' '}
-					<Link
-						href='https://github.com/shadcn'
-						target='_blank'
-						className='underline underline-offset-4'
-					>
-						shadcn
-					</Link>
-					. Hosted on{' '}
-					<Link href='https://vercel.com/' target='_blank' className='underline underline-offset-4'>
-						Vercel
-					</Link>
-					. The source code is available on{' '}
-					<Link
-						href='https://github.com/chadlydev'
-						target='_blank'
-						className='underline underline-offset-4'
-					>
-						GitHub
-					</Link>
-					.
-				</Small>
-				<ThemeDropdownMenu />
-			</footer>
+			<Footer />
 		</main>
 	);
 }
