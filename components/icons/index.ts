@@ -34,3 +34,4 @@ export { PlusIcon } from './plus-icon';
 export { LinkIcon } from './link-icon';
 export { EyeIcon } from './eye-icon';
 export { LogoutIcon } from './logout-icon';
+export { ShareIcon } from './share-icon';
