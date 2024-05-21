@@ -13,7 +13,10 @@ export const SESSION_EXPIRES_IN = 60 * 60 * 24 * 30; // 30 days
 
 // --- Routes ---
 export const ROUTE_ROOT = '/';
-export const ROUTE_DASHBOARD = '/app/dashboard';
+export const ROUTE_LINKS = '/app/links';
+export const ROUTE_PROFILE_DETAILS = '/app/profile-details';
+export const ROUTE_ACCOUNT_SETTINGS = '/app/account-settings';
+export const ROUTE_PREVIEW_PAGE = '/preview-page';
 export const ROUTE_SETTINGS = '/app/settings';
 export const ROUTE_LOGIN = '/login';
 export const ROUTE_SIGN_UP = '/sign-up';
