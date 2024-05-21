@@ -2,17 +2,14 @@ import Separator from '@/components/separator';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Small } from '@/components/typography';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { ROUTE_SIGN_UP } from '@/lib/constants';
 import { ArrowLeftIcon } from '@/components/icons';
+import Link from '@/components/link';
 
 export default function GetStartedPage() {
 	return (
 		<main className='flex flex-col gap-4'>
-			<Link
-				href={ROUTE_SIGN_UP}
-				className='hover:text-primary flex max-w-fit items-center gap-2 text-sm'
-			>
+			<Link href={ROUTE_SIGN_UP}>
 				<ArrowLeftIcon size={16} /> Back to signup
 			</Link>
 			<Card className='sm:w-[25rem]'>
