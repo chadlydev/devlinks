@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
-export default function Logo() {
+export default function Logo({ className }: { className?: string }) {
 	return (
-		<Link href='/' className='text-foreground'>
+		<Link href='/' className={cn('text-foreground', className)}>
 			<svg
 				width='167'
 				height='34'
