@@ -30,3 +30,6 @@ export { ExternalLinkIcon } from './external-link-icon';
 export { GoogleIcon } from './google-icon';
 export { GithubIcon } from './github-icon';
 export { ChevronDownIcon } from './chevron-down-icon';
+export { PlusIcon } from './plus-icon';
+export { LinkIcon } from './link-icon';
+export { EyeIcon } from './eye-icon';
