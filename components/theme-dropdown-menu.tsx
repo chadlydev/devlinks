@@ -11,8 +11,9 @@ import {
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { ChevronsUpDownIcon, MoonIcon, SunIcon } from '@/components/icons';
+import { cn } from '@/lib/utils';
 
-export default function ThemeDropdownMenu() {
+export default function ThemeDropdownMenu({ className }: { className?: string }) {
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 	const [value, setValue] = useState('dark');
@@ -24,7 +25,12 @@ export default function ThemeDropdownMenu() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className='border-input bg-muted/40 ring-offset-background placeholder:text-muted-foreground focus:ring-ring dark:bg-muted/40 flex h-fit items-center justify-between gap-1 rounded-md border px-2 py-1 text-xs capitalize focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1'>
+			<DropdownMenuTrigger
+				className={cn(
+					'border-input bg-muted/40 ring-offset-background placeholder:text-muted-foreground focus:ring-ring dark:bg-muted/40 flex h-fit items-center justify-between gap-1 rounded-md border px-2 py-1 text-xs capitalize focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+					className
+				)}
+			>
 				{mounted && (
 					<>
 						{value === 'light' ? <SunIcon className='size-3' /> : <MoonIcon className='size-3' />}
