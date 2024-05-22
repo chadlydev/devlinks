@@ -1,8 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { PlusIcon } from '@/components/icons';
-import EmptyState from '@/app/(app)/app/links/empty-state';
 import IllustrationPhoneMockup from '@/app/(app)/app/links/illustration-phone-mockup';
+import LinksForm from '@/app/(app)/app/links/links-form';
 
 export default function LinksPage() {
 	return (
@@ -10,23 +8,15 @@ export default function LinksPage() {
 			<div className='bg-card hidden w-[480px] flex-shrink-0 flex-grow-0 items-center justify-center rounded-lg border p-6 px-12 shadow-sm lg:flex'>
 				<IllustrationPhoneMockup />
 			</div>
-			<Card>
+			<Card className='flex min-h-[600px] flex-grow flex-col'>
 				<CardHeader>
 					<CardTitle>Customize your links</CardTitle>
 					<CardDescription>
 						Add/edit/remove links below and then share all your profiles with the world!
 					</CardDescription>
 				</CardHeader>
-				<CardContent className='flex flex-col gap-8'>
-					<Button variant='secondary'>
-						<PlusIcon size={16} />
-						Add new link
-					</Button>
-
-					{/*	TODO add Empty state */}
-					<EmptyState />
-
-					{/*	TODO add Link form */}
+				<CardContent className='flex-grow'>
+					<LinksForm />
 				</CardContent>
 			</Card>
 		</main>

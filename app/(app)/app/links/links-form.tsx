@@ -1,0 +1,146 @@
+'use client';
+
+import { useFieldArray, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/button';
+import { z } from 'zod';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormInput,
+	FormItem,
+	FormLabel,
+	FormMessage
+} from '@/components/ui/form';
+import { GripVerticalIcon, PlusIcon, TrashIcon } from '@/components/icons';
+import EmptyState from '@/app/(app)/app/links/empty-state';
+import { Large } from '@/components/typography';
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue
+} from '@/components/ui/select';
+
+const platformOptions = [
+	{ value: 'github', label: 'GitHub' },
+	{ value: 'twitter', label: 'Twitter' },
+	{ value: 'linkedin', label: 'LinkedIn' },
+	{ value: 'youtube', label: 'YouTube' },
+	{ value: 'facebook', label: 'Facebook' },
+	{ value: 'twitch', label: 'Twitch' },
+	{ value: 'devto', label: 'Dev.to' },
+	{ value: 'codewars', label: 'Codewars' },
+	{ value: 'freecodecamp', label: 'freeCodeCamp' },
+	{ value: 'gitlab', label: 'GitLab' },
+	{ value: 'hashnode', label: 'Hashnode' },
+	{ value: 'stackoverflow', label: 'Stack Overflow' }
+];
+
+const linkObject = z.object({
+	platform: z.string({ required_error: 'This field is required' }).min(1),
+	link: z.string({ required_error: 'This field is required' }).url({ message: 'Invalid URL' })
+});
+
+const linksFormSchema = z.object({
+	links: z.array(linkObject)
+});
+
+type TLinksForm = z.infer<typeof linksFormSchema>;
+
+export default function LinksForm() {
+	const form = useForm<TLinksForm>({
+		resolver: zodResolver(linksFormSchema),
+		defaultValues: {
+			links: [{ platform: 'github', link: 'https://github.com/chadlydev' }]
+		}
+	});
+
+	const {
+		control,
+		formState: { isSubmitting, isDirty }
+	} = form;
+
+	const onSubmit = async (values: TLinksForm) => {
+		console.log(values);
+	};
+
+	const { fields, append, remove, swap, update } = useFieldArray({
+		name: 'links',
+		control
+	});
+
+	return (
+		<div className='flex h-full flex-grow flex-col gap-8'>
+			<Button variant='secondary' onClick={() => append({ platform: 'github', link: '' })}>
+				<PlusIcon size={16} />
+				Add new link
+			</Button>
+			{!fields.length ? (
+				<EmptyState />
+			) : (
+				<Form {...form}>
+					<form onSubmit={form.handleSubmit(onSubmit)} className='flex h-full flex-col gap-4'>
+						{fields.map((field, index) => (
+							<div key={field.id} className='bg-muted flex flex-col gap-4 rounded-lg p-4 pb-6 pt-4'>
+								<div className='flex items-center justify-between'>
+									<div className='flex items-center gap-1'>
+										<GripVerticalIcon size={16} className='text-muted-foreground cursor-grab' />
+										<Large>Link #{index + 1}</Large>
+									</div>
+									<Button type='button' size='sm' variant='outline' onClick={() => remove(index)}>
+										<TrashIcon size={14} />
+										Remove
+									</Button>
+								</div>
+								<FormField
+									control={form.control}
+									name={`links.${index}.platform` as const}
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Platform</FormLabel>
+											<Select onValueChange={field.onChange} defaultValue={field.value}>
+												<FormControl>
+													<SelectTrigger>
+														<SelectValue placeholder='Select Platform' />
+													</SelectTrigger>
+												</FormControl>
+												<SelectContent>
+													{platformOptions.map((platformOption) => (
+														<SelectItem value={platformOption.value} key={platformOption.value}>
+															{platformOption.label}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								<FormField
+									control={form.control}
+									name={`links.${index}.link` as const}
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Link</FormLabel>
+											<FormControl>
+												<FormInput {...field} placeholder='https://github.com/chadlydev' />
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
+						))}
+
+						<Button disabled={isSubmitting || !isDirty} className='mt-auto'>
+							Save
+						</Button>
+					</form>
+				</Form>
+			)}
+		</div>
+	);
+}
