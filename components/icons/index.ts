@@ -35,3 +35,4 @@ export { LinkIcon } from './link-icon';
 export { EyeIcon } from './eye-icon';
 export { LogoutIcon } from './logout-icon';
 export { ShareIcon } from './share-icon';
+export { GripVerticalIcon } from './grip-vertical-icon';
