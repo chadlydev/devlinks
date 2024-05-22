@@ -4,11 +4,25 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { z } from 'zod';
-import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormInput,
+	FormItem,
+	FormLabel,
+	FormMessage
+} from '@/components/ui/form';
 import { ChevronDownIcon, ChevronUpIcon, PlusIcon, TrashIcon } from '@/components/icons';
 import EmptyState from '@/app/(app)/app/links/empty-state';
 import { Large } from '@/components/typography';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue
+} from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -154,7 +168,7 @@ export default function LinksForm() {
 												<Button
 													type='button'
 													size='icon'
-													variant='destructive'
+													variant='outline'
 													className='mt-auto'
 													onClick={() => remove(index)}
 												>

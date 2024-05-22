@@ -11,14 +11,7 @@ import {
 import { LogoIcon } from '@/components/icons/logo-icon';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-	AccountIcon,
-	EyeIcon,
-	LinkIcon,
-	LogoutIcon,
-	MenuIcon,
-	SettingsIcon
-} from '@/components/icons';
+import { AccountIcon, EyeIcon, LinkIcon, LogoutIcon, MenuIcon, SettingsIcon } from '@/components/icons';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import ThemeDropdownMenu from '@/components/theme-dropdown-menu';
 import { Small } from '@/components/typography';
@@ -53,7 +46,7 @@ export default function Header() {
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	return (
-		<header className='bg-card/80 fixed left-0 right-0 top-0 z-10 flex h-16 items-center justify-between border-b px-4 backdrop-blur-sm md:m-4 md:grid md:grid-cols-3 md:rounded-xl md:border'>
+		<header className='bg-card/80 fixed left-0 right-0 top-0 z-10 flex h-16 items-center justify-between border-b px-4 backdrop-blur-sm md:mx-4 md:mt-4 md:grid md:grid-cols-3 md:rounded-xl md:border'>
 			<Link href={ROUTE_ROOT} className='w-fit'>
 				<LogoIcon />
 			</Link>

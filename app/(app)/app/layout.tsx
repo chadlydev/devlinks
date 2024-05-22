@@ -5,7 +5,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 	return (
 		<div className='flex min-h-svh flex-col'>
 			<Header />
-			<div className='mt-16 md:mt-24'>{children}</div>
+			<div className='mt-16 md:mt-20'>{children}</div>
 		</div>
 	);
 }
