@@ -4,9 +4,12 @@ import { Slot } from '@radix-ui/react-slot';
 import {
 	Controller,
 	ControllerProps,
+	FieldError,
+	FieldErrorsImpl,
 	FieldPath,
 	FieldValues,
 	FormProvider,
+	Merge,
 	useFormContext
 } from 'react-hook-form';
 
@@ -154,10 +157,34 @@ const FormDescription = React.forwardRef<
 });
 FormDescription.displayName = 'FormDescription';
 
+type ArrayFieldError = Merge<
+	FieldError,
+	FieldErrorsImpl<{
+		value: string;
+		id: string;
+	}>
+>;
+
+const isFormArrayField = (arg: FieldError | ArrayFieldError): arg is ArrayFieldError => {
+	return (arg as ArrayFieldError).value !== undefined;
+};
+
+type FormFieldError = FieldError | ArrayFieldError | undefined;
+
 const FormMessage = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
 	({ className, children, ...props }, ref) => {
 		const { error, formMessageId } = useFormField();
-		const body = error ? String(error?.message) : children;
+
+		const extendedError = error as FormFieldError;
+
+		let body;
+		if (extendedError === undefined) {
+			body = children;
+		} else if (isFormArrayField(extendedError)) {
+			body = String(extendedError.value?.message);
+		} else {
+			body = String(extendedError.message);
+		}
 
 		if (!body) {
 			return null;
