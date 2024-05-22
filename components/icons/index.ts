@@ -37,3 +37,5 @@ export { LogoutIcon } from './logout-icon';
 export { ShareIcon } from './share-icon';
 export { GripVerticalIcon } from './grip-vertical-icon';
 export { TrashIcon } from './trash-icon';
+export { CheckIcon } from './check-icon';
+export { ChevronUpIcon } from './chevron-up-icon';
