@@ -8,7 +8,7 @@ export default function LinksPage() {
 			<div className='bg-card hidden w-[480px] flex-shrink-0 flex-grow-0 items-center justify-center rounded-lg border p-6 px-12 shadow-sm lg:flex'>
 				<IllustrationPhoneMockup />
 			</div>
-			<Card className='flex min-h-[600px] flex-grow flex-col'>
+			<Card className='flex flex-grow flex-col'>
 				<CardHeader>
 					<CardTitle>Customize your links</CardTitle>
 					<CardDescription>
