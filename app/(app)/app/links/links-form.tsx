@@ -4,27 +4,14 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { z } from 'zod';
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormInput,
-	FormItem,
-	FormLabel,
-	FormMessage
-} from '@/components/ui/form';
-import { ChevronDownIcon, ChevronUpIcon, PlusIcon, TrashIcon } from '@/components/icons';
+import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { CheckIcon, ChevronDownIcon, ChevronsUpDownIcon, ChevronUpIcon, PlusIcon, TrashIcon } from '@/components/icons';
 import EmptyState from '@/app/(app)/app/links/empty-state';
 import { Large } from '@/components/typography';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue
-} from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 
 const platformOptions = [
 	{ value: 'github', label: 'GitHub' },
@@ -84,7 +71,7 @@ export default function LinksForm() {
 
 	return (
 		<div className='flex h-full flex-grow flex-col gap-8'>
-			<Button variant='secondary' onClick={() => append({ platform: 'github', link: '' })}>
+			<Button variant='secondary' onClick={() => append({ platform: '', link: '' })}>
 				<PlusIcon size={16} />
 				Add new link
 			</Button>
@@ -111,23 +98,59 @@ export default function LinksForm() {
 													render={({ field }) => (
 														<FormItem>
 															<FormLabel>Platform</FormLabel>
-															<Select onValueChange={field.onChange} defaultValue={field.value}>
-																<FormControl>
-																	<SelectTrigger>
-																		<SelectValue placeholder='Select Platform' />
-																	</SelectTrigger>
-																</FormControl>
-																<SelectContent>
-																	{platformOptions.map((platformOption) => (
-																		<SelectItem
-																			value={platformOption.value}
-																			key={platformOption.value}
+															<Popover>
+																<PopoverTrigger asChild>
+																	<FormControl>
+																		<Button
+																			variant='outline'
+																			role='combobox'
+																			className={cn(
+																				'justify-between font-normal',
+																				!field.value && 'text-muted-foreground'
+																			)}
 																		>
-																			{platformOption.label}
-																		</SelectItem>
-																	))}
-																</SelectContent>
-															</Select>
+																			{field.value
+																				? platformOptions.find(
+																						(platformOption) => platformOption.value === field.value
+																					)?.label
+																				: 'Select platform'}
+																			<ChevronsUpDownIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+																		</Button>
+																	</FormControl>
+																</PopoverTrigger>
+																<PopoverContent>
+																	<Command>
+																		<CommandInput placeholder='Search platform...' />
+																		<CommandEmpty>No platform found.</CommandEmpty>
+																		<CommandGroup>
+																			<CommandList>
+																				{platformOptions.map((platformOption) => (
+																					<CommandItem
+																						value={platformOption.label}
+																						key={platformOption.value}
+																						onSelect={() => {
+																							form.setValue(
+																								`links.${index}.platform`,
+																								platformOption.value
+																							);
+																						}}
+																					>
+																						<CheckIcon
+																							className={cn(
+																								'mr-2 h-4 w-4',
+																								platformOption.value === field.value
+																									? 'opacity-100'
+																									: 'opacity-0'
+																							)}
+																						/>
+																						{platformOption.label}
+																					</CommandItem>
+																				))}
+																			</CommandList>
+																		</CommandGroup>
+																	</Command>
+																</PopoverContent>
+															</Popover>
 															<FormMessage />
 														</FormItem>
 													)}
