@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import LinksForm from '@/app/(app)/app/(mockup)/links/links-form';
+import LinksForm from '@/app/(app)/app/links/links-form';
 
 export default function LinksPage() {
 	return (

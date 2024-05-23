@@ -2,8 +2,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 export default function ProfileDetailsPage() {
 	return (
-		<main>
-			<Card className='flex h-full flex-grow flex-col lg:ml-[504px]'>
+		<main className='flex h-full flex-grow flex-col lg:ml-[504px]'>
+			<Card>
 				<CardHeader>
 					<CardTitle>Profile Details</CardTitle>
 					<CardDescription>

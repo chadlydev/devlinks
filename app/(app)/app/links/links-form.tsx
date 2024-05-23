@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
 import { PlusIcon } from '@/components/icons';
-import EmptyState from '@/app/(app)/app/(mockup)/links/empty-state';
+import EmptyState from '@/app/(app)/app/links/empty-state';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import LinkItem from '@/app/(app)/app/(mockup)/links/link-item';
+import LinkItem from '@/app/(app)/app/links/link-item';
 
 const linkObject = z.object({
 	platform: z
