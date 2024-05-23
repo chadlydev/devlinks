@@ -39,3 +39,4 @@ export { GripVerticalIcon } from './grip-vertical-icon';
 export { TrashIcon } from './trash-icon';
 export { CheckIcon } from './check-icon';
 export { ChevronUpIcon } from './chevron-up-icon';
+export { SearchIcon } from './search-icon';
