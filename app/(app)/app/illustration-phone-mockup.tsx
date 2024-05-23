@@ -1,5 +1,6 @@
 import { Large, Small } from '@/components/typography';
 import { SocialButton } from '@/components/social-button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function IllustrationPhoneMockup() {
 	return (
@@ -29,7 +30,10 @@ export default function IllustrationPhoneMockup() {
 
 			<div className='absolute top-0 flex w-[306px] flex-grow flex-col items-center gap-12 px-10 pt-16'>
 				<div className='flex flex-col items-center gap-5'>
-					<div className='size-24 rounded-full border bg-white' />
+					<Avatar className='bg-card size-24 border'>
+						<AvatarImage src='path_to_image' alt='avatar' />
+						<AvatarFallback className='text-2xl'>CR</AvatarFallback>
+					</Avatar>
 					<div className='flex flex-col items-center gap-2'>
 						<Large>Chadly Riedewald</Large>
 						<Small>hi@chadly.dev</Small>
