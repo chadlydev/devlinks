@@ -1,4 +1,19 @@
 // --- Email verification ---
+import {
+	CodewarsIcon,
+	DevtoIcon,
+	FacebookIcon,
+	FreecodecampIcon,
+	GithubIcon,
+	GitlabIcon,
+	HashnodeIcon,
+	LinkedinIcon,
+	StackoverflowIcon,
+	TwitchIcon,
+	XIcon,
+	YoutubeIcon
+} from '@/components/icons';
+
 export const EMAIL_VERIFICATION_TIMER = 60; // seconds
 export const EMAIL_VERIFICATION_TIMER_MS = EMAIL_VERIFICATION_TIMER * 1000; // ms
 export const EMAIL_VERIFICATION_EXPIRES_IN = 15; // minutes
@@ -31,3 +46,49 @@ export const GOOGLE_OAUTH_API_URL = 'https://www.googleapis.com/oauth2/v1/userin
 
 export const GITHUB_OAUTH_STATE_COOKIES = 'github_oauth_state';
 export const GITHUB_OAUTH_API_URL = 'https://api.github.com/user';
+
+// --- Social Platforms ---
+export const socialPlatformItems = [
+	{ value: 'github', label: 'GitHub' },
+	{ value: 'twitter', label: 'Twitter' },
+	{ value: 'linkedin', label: 'LinkedIn' },
+	{ value: 'youtube', label: 'YouTube' },
+	{ value: 'facebook', label: 'Facebook' },
+	{ value: 'twitch', label: 'Twitch' },
+	{ value: 'devto', label: 'Dev.to' },
+	{ value: 'codewars', label: 'Codewars' },
+	{ value: 'freecodecamp', label: 'freeCodeCamp' },
+	{ value: 'gitlab', label: 'GitLab' },
+	{ value: 'hashnode', label: 'Hashnode' },
+	{ value: 'stackoverflow', label: 'Stack Overflow' }
+];
+
+export const socialPlatformIcons = {
+	github: GithubIcon,
+	x: XIcon,
+	linkedin: LinkedinIcon,
+	youtube: YoutubeIcon,
+	facebook: FacebookIcon,
+	twitch: TwitchIcon,
+	devto: DevtoIcon,
+	codewars: CodewarsIcon,
+	freecodecamp: FreecodecampIcon,
+	gitlab: GitlabIcon,
+	hashnode: HashnodeIcon,
+	stackoverflow: StackoverflowIcon
+};
+
+export const socialPlatformText = {
+	github: 'GitHub',
+	x: 'X',
+	linkedin: 'LinkedIn',
+	youtube: 'YouTube',
+	facebook: 'Facebook',
+	twitch: 'Twitch',
+	devto: 'Dev.to',
+	codewars: 'Codewars',
+	freecodecamp: 'freeCodeCamp',
+	gitlab: 'GitLab',
+	hashnode: 'Hashnode',
+	stackoverflow: 'Stack Overflow'
+};
