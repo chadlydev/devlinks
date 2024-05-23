@@ -33,6 +33,20 @@
 		--ring: 42 100% 62%; /* amber9 */
 
 		--radius: 0.5rem;
+
+		/* Custom colors */
+		--github: 0 0% 10%;
+		--x: 0 0% 0%;
+		--linkedin: 210 90% 40%;
+		--youtube: 360 100% 50%;
+		--facebook: 217 100% 51%;
+		--twitch: 264 100% 64%;
+		--devto: 0 0% 0%;
+		--codewars: 0 82% 60%;
+		--freecodecamp: 240 56% 9%;
+		--gitlab: 9 75% 52%;
+		--hashnode: 224 100% 58%;
+		--stackoverflow: 27 90% 48%;
 	}
 
 	.dark {

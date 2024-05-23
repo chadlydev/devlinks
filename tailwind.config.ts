@@ -55,7 +55,19 @@ const config = {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
-				}
+				},
+				github: 'hsl(var(--github))',
+				x: 'hsl(var(--x))',
+				linkedin: 'hsl(var(--linkedin))',
+				youtube: 'hsl(var(--youtube))',
+				facebook: 'hsl(var(--facebook))',
+				twitch: 'hsl(var(--twitch))',
+				devto: 'hsl(var(--devto))',
+				codewars: 'hsl(var(--codewars))',
+				freecodecamp: 'hsl(var(--freecodecamp))',
+				gitlab: 'hsl(var(--gitlab))',
+				hashnode: 'hsl(var(--hashnode))',
+				stackoverflow: 'hsl(var(--stackoverflow))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
