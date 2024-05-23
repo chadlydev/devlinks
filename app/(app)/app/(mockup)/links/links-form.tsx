@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 import { z } from 'zod';
 import { Form } from '@/components/ui/form';
 import { PlusIcon } from '@/components/icons';
-import EmptyState from '@/app/(app)/app/links/empty-state';
+import EmptyState from '@/app/(app)/app/(mockup)/links/empty-state';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import LinkItem from '@/app/(app)/app/links/link-item';
+import LinkItem from '@/app/(app)/app/(mockup)/links/link-item';
 
 const linkObject = z.object({
 	platform: z
@@ -58,7 +58,7 @@ export default function LinksForm() {
 			) : (
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-grow flex-col gap-4'>
-						<ScrollArea className='-mr-4 h-[calc(100svh-376px)] pr-4 md:h-[calc(100svh-404px)]'>
+						<ScrollArea className='-mr-4 h-[calc(100svh-376px)] pr-4 md:h-[calc(100svh-396px)]'>
 							<ol className='flex h-max flex-col gap-4'>
 								{fields.map((field, index) => {
 									return (
