@@ -1,6 +1,6 @@
 import { IconProps } from './';
 
-export function XIcon({ size = 24, role, ...props }: IconProps) {
+export function TwitchIcon({ size = 24, role, ...props }: IconProps) {
 	return (
 		<>
 			<svg
@@ -12,7 +12,7 @@ export function XIcon({ size = 24, role, ...props }: IconProps) {
 			>
 				<path
 					fill='currentColor'
-					d='M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584l-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z'
+					d='M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z'
 				></path>
 			</svg>
 			{role && <span className='sr-only'>{role}</span>}

@@ -1,6 +1,6 @@
 import { IconProps } from './';
 
-export function XIcon({ size = 24, role, ...props }: IconProps) {
+export function HashnodeIcon({ size = 24, role, ...props }: IconProps) {
 	return (
 		<>
 			<svg
@@ -12,7 +12,7 @@ export function XIcon({ size = 24, role, ...props }: IconProps) {
 			>
 				<path
 					fill='currentColor'
-					d='M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584l-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z'
+					d='m22.351 8.019l-6.37-6.37a5.63 5.63 0 0 0-7.962 0l-6.37 6.37a5.63 5.63 0 0 0 0 7.962l6.37 6.37a5.63 5.63 0 0 0 7.962 0l6.37-6.37a5.63 5.63 0 0 0 0-7.962M12 15.953a3.953 3.953 0 1 1 0-7.906a3.953 3.953 0 0 1 0 7.906'
 				></path>
 			</svg>
 			{role && <span className='sr-only'>{role}</span>}
