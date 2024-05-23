@@ -27,21 +27,7 @@ import {
 } from '@/components/ui/command';
 import { UseFieldArrayReturn, UseFormReturn } from 'react-hook-form';
 import { useState } from 'react';
-
-const platformOptions = [
-	{ value: 'github', label: 'GitHub' },
-	{ value: 'twitter', label: 'Twitter' },
-	{ value: 'linkedin', label: 'LinkedIn' },
-	{ value: 'youtube', label: 'YouTube' },
-	{ value: 'facebook', label: 'Facebook' },
-	{ value: 'twitch', label: 'Twitch' },
-	{ value: 'devto', label: 'Dev.to' },
-	{ value: 'codewars', label: 'Codewars' },
-	{ value: 'freecodecamp', label: 'freeCodeCamp' },
-	{ value: 'gitlab', label: 'GitLab' },
-	{ value: 'hashnode', label: 'Hashnode' },
-	{ value: 'stackoverflow', label: 'Stack Overflow' }
-];
+import { socialPlatformItems } from '@/lib/constants';
 
 type LinkItemProps = {
 	id: string;
@@ -98,9 +84,7 @@ export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps)
 											})}
 										>
 											{field.value
-												? platformOptions.find(
-														(platformOption) => platformOption.value === field.value
-													)?.label
+												? socialPlatformItems.find((item) => item.value === field.value)?.label
 												: 'Select platform'}
 											<ChevronsUpDownIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
 										</Button>
@@ -112,22 +96,22 @@ export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps)
 										<CommandEmpty>No platform found.</CommandEmpty>
 										<CommandGroup>
 											<CommandList>
-												{platformOptions.map((platformOption) => (
+												{socialPlatformItems.map((item) => (
 													<CommandItem
-														value={platformOption.label}
-														key={platformOption.value}
+														value={item.label}
+														key={item.value}
 														onSelect={() => {
-															form.setValue(`links.${index}.platform`, platformOption.value);
+															form.setValue(`links.${index}.platform`, item.value);
 															setOpen(false);
 														}}
 													>
 														<CheckIcon
 															className={cn(
 																'mr-2 h-4 w-4',
-																platformOption.value === field.value ? 'opacity-100' : 'opacity-0'
+																item.value === field.value ? 'opacity-100' : 'opacity-0'
 															)}
 														/>
-														{platformOption.label}
+														{item.label}
 													</CommandItem>
 												))}
 											</CommandList>
