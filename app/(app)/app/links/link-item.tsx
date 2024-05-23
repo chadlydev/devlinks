@@ -106,7 +106,7 @@ export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps)
 										</Button>
 									</FormControl>
 								</PopoverTrigger>
-								<PopoverContent>
+								<PopoverContent onOpenAutoFocus={(e) => e.preventDefault()}>
 									<Command>
 										<CommandInput placeholder='Search platform...' />
 										<CommandEmpty>No platform found.</CommandEmpty>
