@@ -11,7 +11,7 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				github: 'bg-github text-white hover:bg-github/80',
-				x: 'bg-x text-white hover:bg-x/50',
+				x: 'bg-x text-white hover:bg-x/80 dark:hover:bg-x/60',
 				linkedin: 'bg-linkedin text-white hover:bg-linkedin/80',
 				youtube: 'bg-youtube text-white hover:bg-youtube/80',
 				facebook: 'bg-facebook text-white hover:bg-facebook/80',
