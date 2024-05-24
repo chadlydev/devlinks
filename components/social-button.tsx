@@ -1,8 +1,60 @@
 import * as React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { ArrowRightIcon } from '@/components/icons';
-import { socialPlatformIcons, socialPlatformText } from '@/lib/constants';
+import {
+	ArrowRightIcon,
+	CodewarsIcon,
+	DevtoIcon,
+	FacebookIcon,
+	FreecodecampIcon,
+	GithubIcon,
+	GitlabIcon,
+	HashnodeIcon,
+	LinkedinIcon,
+	StackoverflowIcon,
+	TwitchIcon,
+	XIcon,
+	YoutubeIcon
+} from '@/components/icons';
+import { PlatformLabel, PlatformValue } from '@/lib/types';
+
+type PlatformIcons = {
+	[K in PlatformValue]?: any;
+};
+
+const platformIcons: PlatformIcons = {
+	github: GithubIcon,
+	x: XIcon,
+	linkedin: LinkedinIcon,
+	youtube: YoutubeIcon,
+	facebook: FacebookIcon,
+	twitch: TwitchIcon,
+	devto: DevtoIcon,
+	codewars: CodewarsIcon,
+	freecodecamp: FreecodecampIcon,
+	gitlab: GitlabIcon,
+	hashnode: HashnodeIcon,
+	stackoverflow: StackoverflowIcon
+};
+
+type PlatformLabels = {
+	[K in PlatformValue]?: PlatformLabel;
+};
+
+const platformLabels: PlatformLabels = {
+	github: 'GitHub',
+	x: 'X',
+	linkedin: 'LinkedIn',
+	youtube: 'YouTube',
+	facebook: 'Facebook',
+	twitch: 'Twitch',
+	devto: 'Dev.to',
+	codewars: 'Codewars',
+	freecodecamp: 'freeCodeCamp',
+	gitlab: 'GitLab',
+	hashnode: 'Hashnode',
+	stackoverflow: 'Stack Overflow'
+};
 
 type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 const buttonVariants = cva(
@@ -36,13 +88,13 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 
 const SocialButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 	({ className, variant, ...props }, ref) => {
-		const Icon = socialPlatformIcons[variant!];
-		const text = socialPlatformText[variant!];
+		const Icon = platformIcons[variant!];
+		const label = platformLabels[variant!];
 
 		return (
 			<button className={cn(buttonVariants({ variant, className }))} ref={ref} {...props}>
 				<Icon size={16} />
-				{text}
+				{label}
 				<ArrowRightIcon size={16} className='ml-auto' />
 			</button>
 		);

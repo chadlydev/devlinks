@@ -1,33 +1,33 @@
 import { cn } from '@/lib/utils';
 import { Large } from '@/components/typography';
-import {
-	FormControl,
-	FormField,
-	FormInput,
-	FormItem,
-	FormLabel,
-	FormMessage
-} from '@/components/ui/form';
+import { FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
-import {
-	CheckIcon,
-	ChevronDownIcon,
-	ChevronsUpDownIcon,
-	ChevronUpIcon,
-	TrashIcon
-} from '@/components/icons';
-import {
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-	CommandList
-} from '@/components/ui/command';
+import { CheckIcon, ChevronDownIcon, ChevronsUpDownIcon, ChevronUpIcon, TrashIcon } from '@/components/icons';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { UseFieldArrayReturn, UseFormReturn } from 'react-hook-form';
 import { useState } from 'react';
-import { socialPlatformItems } from '@/lib/constants';
+import { PlatformLabel, PlatformValue } from '@/lib/types';
+
+type PlatformItem = {
+	value: PlatformValue;
+	label: PlatformLabel;
+};
+
+export const platformItemList: PlatformItem[] = [
+	{ value: 'github', label: 'GitHub' },
+	{ value: 'x', label: 'X' },
+	{ value: 'linkedin', label: 'LinkedIn' },
+	{ value: 'youtube', label: 'YouTube' },
+	{ value: 'facebook', label: 'Facebook' },
+	{ value: 'twitch', label: 'Twitch' },
+	{ value: 'devto', label: 'Dev.to' },
+	{ value: 'codewars', label: 'Codewars' },
+	{ value: 'freecodecamp', label: 'freeCodeCamp' },
+	{ value: 'gitlab', label: 'GitLab' },
+	{ value: 'hashnode', label: 'Hashnode' },
+	{ value: 'stackoverflow', label: 'Stack Overflow' }
+];
 
 type LinkItemProps = {
 	id: string;
@@ -84,7 +84,7 @@ export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps)
 											})}
 										>
 											{field.value
-												? socialPlatformItems.find((item) => item.value === field.value)?.label
+												? platformItemList.find((item) => item.value === field.value)?.label
 												: 'Select platform'}
 											<ChevronsUpDownIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
 										</Button>
@@ -96,7 +96,7 @@ export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps)
 										<CommandEmpty>No platform found.</CommandEmpty>
 										<CommandGroup>
 											<CommandList>
-												{socialPlatformItems.map((item) => (
+												{platformItemList.map((item) => (
 													<CommandItem
 														value={item.label}
 														key={item.value}
