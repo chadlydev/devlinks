@@ -5,6 +5,7 @@ import { SocialButton } from '@/components/social-button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useProfileContext } from '@/contexts/profile-context';
 import { PlatformValue } from '@/lib/types';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function PhoneMockup() {
 	const { user, links } = useProfileContext();
@@ -37,14 +38,28 @@ export default function PhoneMockup() {
 						<AvatarFallback className='text-2xl'>CR</AvatarFallback>
 					</Avatar>
 					<div className='flex flex-col items-center gap-2'>
-						<Large>{user.name}</Large>
-						<Small>{user.email}</Small>
+						{user.name ? (
+							<Large>{user.name}</Large>
+						) : (
+							<Skeleton className='h-6 w-40 animate-none' />
+						)}
+						{user.email ? (
+							<Small>{user.email}</Small>
+						) : (
+							<Skeleton className='h-4 w-24 animate-none' />
+						)}
 					</div>
 				</div>
 
-				<div className='flex w-full flex-col items-center gap-6'>
+				<div className='z-10 flex w-full flex-col items-center gap-6'>
 					{links.slice(0, 5).map((link, index) => (
 						<SocialButton key={index} variant={link.platform as PlatformValue} />
+					))}
+				</div>
+
+				<div className='absolute top-[276px] flex w-full flex-col items-center gap-6'>
+					{Array.from({ length: 5 }).map((_, index) => (
+						<Skeleton key={index} className='h-10 w-[226px] animate-none rounded-md' />
 					))}
 				</div>
 			</div>
