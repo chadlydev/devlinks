@@ -9,12 +9,15 @@ import { PlusIcon } from '@/components/icons';
 import EmptyState from '@/app/(app)/app/links/empty-state';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import LinkItem from '@/app/(app)/app/links/link-item';
+import { useProfileContext } from '@/contexts/profile-context';
+import { useEffect } from 'react';
+import { Link } from '@/lib/types';
 
 const linkObject = z.object({
 	platform: z
 		.string({ required_error: 'This field is required' })
 		.min(1, { message: 'Pick a platform' }),
-	link: z.string({ required_error: 'This field is required' }).url({ message: 'Invalid URL' })
+	url: z.string({ required_error: 'This field is required' }).url({ message: 'Invalid URL' })
 });
 
 const linksFormSchema = z.object({
@@ -24,15 +27,17 @@ const linksFormSchema = z.object({
 type TLinksForm = z.infer<typeof linksFormSchema>;
 
 export default function LinksForm() {
+	const { links, handleChangeLinks } = useProfileContext();
 	const form = useForm<TLinksForm>({
 		resolver: zodResolver(linksFormSchema),
 		defaultValues: {
-			links: []
+			links
 		}
 	});
 
 	const {
 		control,
+		watch,
 		formState: { isSubmitting, isDirty }
 	} = form;
 
@@ -47,9 +52,17 @@ export default function LinksForm() {
 
 	const { append, fields } = fieldArray;
 
+	useEffect(() => {
+		const subscription = watch(({ links }) => {
+			handleChangeLinks(links as Link[]);
+		});
+
+		return () => subscription.unsubscribe();
+	}, [watch]);
+
 	return (
 		<div className='flex h-full flex-grow flex-col gap-8'>
-			<Button variant='secondary' onClick={() => append({ platform: '', link: '' })}>
+			<Button variant='secondary' onClick={() => append({ platform: 'github', url: '' })}>
 				<PlusIcon size={16} />
 				Add new link
 			</Button>
