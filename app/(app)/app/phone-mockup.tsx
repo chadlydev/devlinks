@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useProfileContext } from '@/contexts/profile-context';
 import { PlatformValue } from '@/lib/types';
 
-export default function IllustrationPhoneMockup() {
+export default function PhoneMockup() {
 	const { user, links } = useProfileContext();
 
 	return (
