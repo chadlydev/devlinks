@@ -16,6 +16,7 @@ type ProfileContextProviderProps = {
 type TProfileContext = {
 	user: User;
 	links: Link[];
+	handleChangeLinks: (links: Link[]) => void;
 };
 
 const ProfileContext = createContext<TProfileContext | null>(null);
@@ -24,7 +25,15 @@ export default function ProfileContextProvider({ data, children }: ProfileContex
 	const [user, setUser] = useState(data.user);
 	const [links, setLinks] = useState(data.links);
 
-	return <ProfileContext.Provider value={{ user, links }}>{children}</ProfileContext.Provider>;
+	const handleChangeLinks = (links: Link[]) => {
+		setLinks([...links]);
+	};
+
+	return (
+		<ProfileContext.Provider value={{ user, links, handleChangeLinks }}>
+			{children}
+		</ProfileContext.Provider>
+	);
 }
 
 export function useProfileContext() {
