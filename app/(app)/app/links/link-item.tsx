@@ -1,10 +1,30 @@
 import { cn } from '@/lib/utils';
 import { Large } from '@/components/typography';
-import { FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+	FormControl,
+	FormField,
+	FormInput,
+	FormItem,
+	FormLabel,
+	FormMessage
+} from '@/components/ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
-import { CheckIcon, ChevronDownIcon, ChevronsUpDownIcon, ChevronUpIcon, TrashIcon } from '@/components/icons';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import {
+	CheckIcon,
+	ChevronDownIcon,
+	ChevronsUpDownIcon,
+	ChevronUpIcon,
+	TrashIcon
+} from '@/components/icons';
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList
+} from '@/components/ui/command';
 import { UseFieldArrayReturn, UseFormReturn } from 'react-hook-form';
 import { useState } from 'react';
 import { PlatformLabel, PlatformValue } from '@/lib/types';
@@ -32,8 +52,8 @@ export const platformItemList: PlatformItem[] = [
 type LinkItemProps = {
 	id: string;
 	index: number;
-	form: UseFormReturn<{ links: { platform: string; link: string }[] }, any, undefined>;
-	fieldArray: UseFieldArrayReturn<{ links: { platform: string; link: string }[] }, 'links', 'id'>;
+	form: UseFormReturn<{ links: { platform: string; url: string }[] }, any, undefined>;
+	fieldArray: UseFieldArrayReturn<{ links: { platform: string; url: string }[] }, 'links', 'id'>;
 };
 
 export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps) {
@@ -55,7 +75,7 @@ export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps)
 				</div>
 				<FormField
 					control={form.control}
-					name={`links.${index}.link` as const}
+					name={`links.${index}.url` as const}
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Link</FormLabel>
