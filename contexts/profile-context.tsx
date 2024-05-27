@@ -17,6 +17,7 @@ type TProfileContext = {
 	user: User;
 	links: Link[];
 	handleChangeLinks: (links: Link[]) => void;
+	handleChangeUserProfilePicture: (url: User['profilePictureUrl']) => void;
 };
 
 const ProfileContext = createContext<TProfileContext | null>(null);
@@ -29,8 +30,17 @@ export default function ProfileContextProvider({ data, children }: ProfileContex
 		setLinks([...links]);
 	};
 
+	const handleChangeUserProfilePicture = (url: User['profilePictureUrl']) => {
+		setUser((prevState) => ({
+			...prevState,
+			profilePictureUrl: url
+		}));
+	};
+
 	return (
-		<ProfileContext.Provider value={{ user, links, handleChangeLinks }}>
+		<ProfileContext.Provider
+			value={{ user, links, handleChangeLinks, handleChangeUserProfilePicture }}
+		>
 			{children}
 		</ProfileContext.Provider>
 	);
