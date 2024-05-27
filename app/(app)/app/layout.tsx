@@ -6,8 +6,8 @@ import ProfileContextProvider from '@/contexts/profile-context';
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
 	const data = {
 		user: {
-			name: 'Chadly Riedewald',
-			email: 'hi@chadly.dev',
+			name: '',
+			email: '',
 			profilePictureUrl: ''
 		},
 		links: []
