@@ -57,3 +57,27 @@ export const profileDetailsFormSchema = z.object({
 		}),
 	email: z.string().email({ message: 'Please enter a valid email address' }).max(100)
 });
+
+export const changePasswordFormSchema = z
+	.object({
+		currentPassword: z
+			.string()
+			.min(8, { message: 'Must contain at least 8 character(s)' })
+			.max(100, { message: 'Cannot exceed 100 character(s)' }),
+		newPassword: z
+			.string()
+			.min(8, { message: 'Must contain at least 8 character(s)' })
+			.max(100, { message: 'Cannot exceed 100 character(s)' }),
+		confirmPassword: z
+			.string()
+			.min(8, { message: 'Must contain at least 8 character(s)' })
+			.max(100, { message: 'Cannot exceed 100 character(s)' })
+	})
+	.refine((data) => data.newPassword === data.confirmPassword, {
+		path: ['confirmPassword'],
+		message: 'Passwords do not match'
+	})
+	.refine((data) => data.currentPassword !== data.newPassword, {
+		path: ['newPassword'],
+		message: 'New password has to be different from old password'
+	});

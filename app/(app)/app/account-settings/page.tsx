@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import ChangePasswordForm from '@/app/(app)/app/account-settings/change-password-form';
 
 export default function Page() {
 	return (
@@ -8,7 +9,9 @@ export default function Page() {
 					<CardTitle>Account Settings</CardTitle>
 					<CardDescription>Manage password, email, and two-factor authentication.</CardDescription>
 				</CardHeader>
-				<CardContent className='flex-grow'></CardContent>
+				<CardContent className='flex-grow'>
+					<ChangePasswordForm />
+				</CardContent>
 			</Card>
 		</main>
 	);
