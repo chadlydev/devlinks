@@ -11,10 +11,10 @@ import {
 	FormField,
 	FormInput,
 	FormItem,
+	FormLabel,
 	FormMessage
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { Small } from '@/components/typography';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AccountIcon } from '@/components/icons';
 import { useProfileContext } from '@/contexts/profile-context';
@@ -69,30 +69,32 @@ export default function ProfilePictureForm() {
 					control={form.control}
 					name='image'
 					render={({ field: { value, onChange, ...fieldProps } }) => (
-						<FormItem className='flex flex-col gap-6 md:h-40 md:flex-row md:items-center md:gap-12'>
-							<Small className='basis-1/3 font-semibold'>Profile picture</Small>
-							<Avatar className='size-32 rounded-md'>
-								<AvatarImage src={filePreviewUrl || undefined} />
-								<AvatarFallback className='bg-background text-muted-foreground rounded-md border'>
-									<AccountIcon size={64} />
-								</AvatarFallback>
-							</Avatar>
-							<div className='flex flex-col gap-2'>
-								<FormControl>
-									<FormInput
-										{...fieldProps}
-										type='file'
-										accept='image/jpeg,image/png,image/webp,image/gif'
-										onChange={handleChange}
-									/>
-								</FormControl>
-								<FormMessage />
-								<FormDescription className='text-xs'>JPEG/PNG/WEBP/GIF &lt;10MB</FormDescription>
-								{file && (
-									<Button disabled={isSubmitting} variant='secondary' size='sm'>
-										Save changes
-									</Button>
-								)}
+						<FormItem className='flex flex-col gap-4 md:flex-row md:items-center md:gap-2'>
+							<FormLabel className='md:min-w-60 lg:min-w-80'>Profile picture</FormLabel>
+							<div className='flex flex-col gap-6 md:flex-row md:items-center md:gap-8'>
+								<Avatar className='size-32 rounded-md'>
+									<AvatarImage src={filePreviewUrl || undefined} />
+									<AvatarFallback className='bg-background text-muted-foreground rounded-md border'>
+										<AccountIcon size={64} />
+									</AvatarFallback>
+								</Avatar>
+								<div className='flex flex-grow flex-col gap-2'>
+									<FormControl>
+										<FormInput
+											{...fieldProps}
+											type='file'
+											accept='image/jpeg,image/png,image/webp,image/gif'
+											onChange={handleChange}
+										/>
+									</FormControl>
+									<FormMessage />
+									<FormDescription className='text-xs'>JPEG/PNG/WEBP/GIF &lt;10MB</FormDescription>
+									{file && (
+										<Button disabled={isSubmitting} variant='secondary' size='sm'>
+											Save changes
+										</Button>
+									)}
+								</div>
 							</div>
 						</FormItem>
 					)}
