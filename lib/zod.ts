@@ -81,3 +81,11 @@ export const changePasswordFormSchema = z
 		path: ['newPassword'],
 		message: 'New password has to be different from old password'
 	});
+
+export const changeEmailFormSchema = z.object({
+	password: z
+		.string()
+		.min(8, { message: 'Must contain at least 8 character(s)' })
+		.max(100, { message: 'Cannot exceed 100 character(s)' }),
+	email: z.string().email({ message: 'Please enter a valid email address' }).max(100)
+});
