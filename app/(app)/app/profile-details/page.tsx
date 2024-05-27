@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import ProfilePictureForm from '@/app/(app)/app/profile-details/profile-picture-form';
 
 export default function ProfileDetailsPage() {
 	return (
@@ -10,7 +11,9 @@ export default function ProfileDetailsPage() {
 						Add your details to create a personal touch to your profile.
 					</CardDescription>
 				</CardHeader>
-				<CardContent className='flex-grow'></CardContent>
+				<CardContent className='flex-grow'>
+					<ProfilePictureForm />
+				</CardContent>
 			</Card>
 		</main>
 	);
