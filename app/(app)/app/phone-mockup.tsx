@@ -31,6 +31,7 @@ export default function PhoneMockup() {
 				</g>
 			</svg>
 
+			<div className='absolute top-0 z-20 h-full w-[306px] bg-transparent' />
 			<div className='absolute top-0 flex w-[306px] flex-grow flex-col items-center gap-12 px-10 pt-16'>
 				<div className='flex flex-col items-center gap-5'>
 					<Avatar className='bg-card size-24 border'>
@@ -60,7 +61,7 @@ export default function PhoneMockup() {
 						))}
 				</div>
 
-				<div className='absolute top-[276px] flex w-full flex-col items-center gap-6'>
+				<div className='absolute top-[278px] flex w-full flex-col items-center gap-6'>
 					{Array.from({ length: 5 }).map((_, index) => (
 						<Skeleton key={index} className='h-10 w-[226px] animate-none rounded-md' />
 					))}
