@@ -60,7 +60,7 @@ export default function MarketingPage() {
 		<main className='flex min-h-svh flex-col'>
 			<Header />
 			<section className='py-28'>
-				<div className='container flex w-fit max-w-3xl flex-col items-center gap-4 px-4 text-center md:px-8'>
+				<div className='container flex w-fit max-w-4xl flex-col items-center gap-4 px-4 text-center md:px-8'>
 					<Badge variant='outline'>Maximize your impact</Badge>
 					<H1>Interact with the developer community in a completely new way.</H1>
 					<Lead>
