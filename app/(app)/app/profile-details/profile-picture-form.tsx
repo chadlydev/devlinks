@@ -18,10 +18,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AccountIcon } from '@/components/icons';
 import { useProfileContext } from '@/contexts/profile-context';
-
-const profilePictureFormSchema = z.object({
-	image: z.instanceof(File).optional()
-});
+import { profilePictureFormSchema } from '@/lib/zod';
 
 export type TProfilePictureForm = z.infer<typeof profilePictureFormSchema>;
 

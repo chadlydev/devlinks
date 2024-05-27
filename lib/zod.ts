@@ -43,3 +43,17 @@ export const resetPasswordFormSchema = z
 		path: ['confirmPassword'],
 		message: 'Passwords do not match'
 	});
+
+export const profilePictureFormSchema = z.object({
+	image: z.instanceof(File).optional()
+});
+
+export const profileDetailsFormSchema = z.object({
+	name: z
+		.string()
+		.max(100)
+		.refine((value) => /^[A-Za-z\s]+$/.test(value), {
+			message: "Name can't have symbols or numbers."
+		}),
+	email: z.string().email({ message: 'Please enter a valid email address' }).max(100)
+});

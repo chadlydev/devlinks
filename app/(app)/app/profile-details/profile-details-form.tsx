@@ -1,14 +1,6 @@
 'use client';
 
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormInput,
-	FormItem,
-	FormLabel,
-	FormMessage
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 import React, { useEffect } from 'react';
 import { z } from 'zod';
@@ -17,11 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { useProfileContext } from '@/contexts/profile-context';
 import { User } from '@/lib/types';
-
-const profileDetailsFormSchema = z.object({
-	name: z.string().max(100),
-	email: z.string().email({ message: 'Please enter a valid email address' }).max(100)
-});
+import { profileDetailsFormSchema } from '@/lib/zod';
 
 export type TProfileDetailsForm = z.infer<typeof profileDetailsFormSchema>;
 
@@ -67,10 +55,12 @@ export default function ProfileDetailsForm() {
 					render={({ field }) => (
 						<FormItem className='md:flex md:items-center'>
 							<FormLabel className='md:min-w-60 lg:min-w-80'>Name*</FormLabel>
-							<FormControl>
-								<FormInput placeholder='John Doe' {...field} />
-							</FormControl>
-							<FormMessage />
+							<div className='flex flex-grow flex-col gap-2'>
+								<FormControl>
+									<FormInput placeholder='John Doe' {...field} />
+								</FormControl>
+								<FormMessage />
+							</div>
 						</FormItem>
 					)}
 				/>
@@ -80,10 +70,12 @@ export default function ProfileDetailsForm() {
 					render={({ field }) => (
 						<FormItem className='md:flex md:items-center'>
 							<FormLabel className='md:min-w-60 lg:min-w-80'>Email*</FormLabel>
-							<FormControl>
-								<FormInput placeholder='someone@example.com' {...field} />
-							</FormControl>
-							<FormMessage />
+							<div className='flex flex-grow flex-col gap-2'>
+								<FormControl>
+									<FormInput placeholder='someone@example.com' {...field} />
+								</FormControl>
+								<FormMessage />
+							</div>
 						</FormItem>
 					)}
 				/>
