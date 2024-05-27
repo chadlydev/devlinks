@@ -10,12 +10,13 @@ import {
 	FormMessage
 } from '@/components/ui/form';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { useProfileContext } from '@/contexts/profile-context';
+import { User } from '@/lib/types';
 
 const profileDetailsFormSchema = z.object({
 	name: z.string().max(100),
@@ -25,7 +26,7 @@ const profileDetailsFormSchema = z.object({
 export type TProfileDetailsForm = z.infer<typeof profileDetailsFormSchema>;
 
 export default function ProfileDetailsForm() {
-	const { user } = useProfileContext();
+	const { user, handleChangeUserDetails } = useProfileContext();
 
 	const form = useForm<TProfileDetailsForm>({
 		resolver: zodResolver(profileDetailsFormSchema),
@@ -38,12 +39,21 @@ export default function ProfileDetailsForm() {
 	const {
 		reset,
 		setError,
+		watch,
 		formState: { isSubmitting, isDirty }
 	} = form;
 
 	const onSubmit = (values: TProfileDetailsForm) => {
 		console.log(values);
 	};
+
+	useEffect(() => {
+		const subscription = watch(({ name, email }) => {
+			handleChangeUserDetails(name as User['name'], email as User['email']);
+		});
+
+		return () => subscription.unsubscribe();
+	}, [watch]);
 
 	return (
 		<Form {...form}>
