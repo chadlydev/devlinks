@@ -43,7 +43,7 @@ const navigation = [
 	},
 	{
 		href: ROUTE_PREVIEW_PAGE,
-		name: 'Preview Page',
+		name: 'Preview',
 		icon: <EyeIcon size={16} />
 	}
 ];
