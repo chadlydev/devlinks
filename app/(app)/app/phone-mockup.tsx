@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useProfileContext } from '@/contexts/profile-context';
 import { PlatformValue } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import { AccountIcon } from '@/components/icons';
+import React from 'react';
 
 export default function PhoneMockup() {
 	const { user, links } = useProfileContext();
@@ -32,22 +34,28 @@ export default function PhoneMockup() {
 			</svg>
 
 			<div className='absolute top-0 z-20 h-full w-[306px] bg-transparent' />
-			<div className='absolute top-0 flex w-[306px] flex-grow flex-col items-center gap-12 px-10 pt-16'>
+			<div className='absolute left-10 top-0 flex w-[226px] flex-grow flex-col items-center gap-12 overflow-x-clip whitespace-nowrap pt-16'>
 				<div className='flex flex-col items-center gap-5'>
-					<Avatar className='bg-card size-24 border'>
-						<AvatarImage src={user.profilePictureUrl} alt='avatar' />
-						<AvatarFallback className='text-2xl'>CR</AvatarFallback>
-					</Avatar>
+					{user.profilePictureUrl ? (
+						<Avatar className='bg-card size-24 border'>
+							<AvatarImage src={user.profilePictureUrl} alt='avatar' />
+							<AvatarFallback className='text-muted-foreground'>
+								<AccountIcon size={48} />
+							</AvatarFallback>
+						</Avatar>
+					) : (
+						<Skeleton className='size-24 animate-none rounded-full' />
+					)}
 					<div className='flex flex-col items-center gap-2'>
 						{user.name ? (
 							<Large>{user.name}</Large>
 						) : (
-							<Skeleton className='h-6 w-40 animate-none' />
+							<Skeleton className='h-7 w-48 animate-none' />
 						)}
 						{user.email ? (
 							<Small>{user.email}</Small>
 						) : (
-							<Skeleton className='h-4 w-24 animate-none' />
+							<Skeleton className='h-3.5 w-28 animate-none' />
 						)}
 					</div>
 				</div>
