@@ -16,7 +16,8 @@ export default async function PreviewLayout({ children }: { children: React.Reac
 					Share Link
 				</Button>
 			</header>
-			<div className='mt-16 md:mt-28'>{children}</div>
+			<div className='bg-primary absolute -z-10 hidden h-1/3 w-full rounded-b-3xl md:block' />
+			{children}
 		</div>
 	);
 }
