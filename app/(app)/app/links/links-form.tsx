@@ -62,7 +62,7 @@ export default function LinksForm() {
 
 	return (
 		<div className='flex h-full flex-grow flex-col gap-8'>
-			<Button variant='secondary' onClick={() => append({ platform: 'github', url: '' })}>
+			<Button variant='secondary' onClick={() => append({ platform: '', url: '' })}>
 				<PlusIcon size={16} />
 				Add new link
 			</Button>
