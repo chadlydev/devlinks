@@ -5,9 +5,18 @@ import { db } from '@/db';
 import { eq } from 'drizzle-orm';
 import { emailVerificationTable } from '@/db/schema';
 import { getErrorMessage, minutesToMs } from '@/lib/utils';
-import { EMAIL_VERIFICATION_EXPIRES_IN, EMAIL_VERIFICATION_TIMER_MS } from '@/lib/constants';
+import {
+	EMAIL_VERIFICATION_EXPIRES_IN,
+	EMAIL_VERIFICATION_TIMER_MS,
+	GITHUB_OAUTH_STATE_COOKIES,
+	GOOGLE_OAUTH_CODE_VERIFIER_COOKIES,
+	GOOGLE_OAUTH_STATE_COOKIES
+} from '@/lib/constants';
 import { resend } from '@/emails';
 import EmailVerification from '@/emails/email-verification';
+import { generateCodeVerifier, generateState } from 'oslo/oauth2';
+import { cookies } from 'next/headers';
+import { github, google } from '@/lib/oauth';
 
 export async function sendEmailVerificationAction() {
 	try {
@@ -48,6 +57,60 @@ export async function sendEmailVerificationAction() {
 
 		return {
 			success: 'Verification code sent'
+		};
+	} catch (error: unknown) {
+		return {
+			error: getErrorMessage(error)
+		};
+	}
+}
+
+export async function createGithubAuthorizationUrlAction() {
+	try {
+		const state = generateState();
+
+		cookies().set(GITHUB_OAUTH_STATE_COOKIES, state, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production'
+		});
+
+		const authorizationURL = await github.createAuthorizationURL(state, {
+			scopes: ['user:email']
+		});
+
+		return {
+			success: true,
+			data: authorizationURL.toString()
+		};
+	} catch (error: unknown) {
+		return {
+			error: getErrorMessage(error)
+		};
+	}
+}
+
+export async function createGoogleAuthorizationUrlAction() {
+	try {
+		const state = generateState();
+		const codeVerifier = generateCodeVerifier();
+
+		cookies().set(GOOGLE_OAUTH_CODE_VERIFIER_COOKIES, codeVerifier, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production'
+		});
+
+		cookies().set(GOOGLE_OAUTH_STATE_COOKIES, state, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production'
+		});
+
+		const authorizationURL = await google.createAuthorizationURL(state, codeVerifier, {
+			scopes: ['email', 'profile']
+		});
+
+		return {
+			success: true,
+			data: authorizationURL.toString()
 		};
 	} catch (error: unknown) {
 		return {
