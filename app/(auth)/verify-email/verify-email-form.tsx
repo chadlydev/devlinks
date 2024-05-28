@@ -14,6 +14,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { verifyEmailFormSchema } from '@/lib/zod';
 import { z } from 'zod';
+import { ResendEmailVerificationButton } from '@/app/(auth)/verify-email/resend-email-verification-button';
+import { verifyEmailAction } from '@/app/(auth)/verify-email/actions';
+import { toast } from 'sonner';
 
 type TVerifyEmailForm = z.infer<typeof verifyEmailFormSchema>;
 
@@ -26,11 +29,18 @@ export default function VerifyEmailForm() {
 	});
 
 	const {
+		reset,
 		formState: { isSubmitting, isDirty, isValid }
 	} = form;
 
 	const onSubmit = async (values: TVerifyEmailForm) => {
-		console.log(values);
+		const result = await verifyEmailAction(values);
+		if (result.error) {
+			toast.error(result.error);
+			reset();
+		} else if (result.success) {
+			toast.success(result.success);
+		}
 	};
 
 	return (
@@ -50,9 +60,7 @@ export default function VerifyEmailForm() {
 					)}
 				/>
 				<Button disabled={isSubmitting || !isDirty || !isValid}>Verify Email</Button>
-				<Button variant='link' type='button' className='-mb-4 -mt-2'>
-					Request new verification code in 59s
-				</Button>
+				<ResendEmailVerificationButton />
 			</form>
 		</Form>
 	);
