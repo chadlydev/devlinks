@@ -1,12 +1,12 @@
 import Separator from '@/components/separator';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Small } from '@/components/typography';
-import { Button } from '@/components/ui/button';
 import { ROUTE_SIGN_UP } from '@/lib/constants';
-import { ArrowLeftIcon } from '@/components/icons';
-import Link from '@/components/link';
 import { validateRequest } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
+import CancelSignUpButton from '@/app/(auth)/get-started/cancel-sign-up-button';
+import RequestEmailVerificationButton from '@/app/(auth)/get-started/request-email-verification-button';
+import RequestEmailChangeForm from '@/app/(auth)/get-started/request-email-change-form';
 
 export default async function GetStartedPage() {
 	const { user } = await validateRequest();
@@ -14,21 +14,19 @@ export default async function GetStartedPage() {
 
 	return (
 		<main className='flex flex-col gap-4'>
-			<Link href={ROUTE_SIGN_UP}>
-				<ArrowLeftIcon size={16} /> Back to signup
-			</Link>
+			<CancelSignUpButton />
 			<Card className='sm:w-[25rem]'>
 				<CardHeader>
 					<CardTitle>Get started</CardTitle>
 					<CardDescription>
 						For your security, we need to send a verification code to your provided email:{' '}
-						<Small className='text-foreground'>chadly@live.nl</Small>
+						<Small className='text-foreground'>{user.email}</Small>
 					</CardDescription>
 				</CardHeader>
 				<CardContent className='flex flex-col gap-4'>
-					<Button>Send verification code</Button>
+					<RequestEmailVerificationButton />
 					<Separator>or</Separator>
-					<Button variant='secondary'>Change email address</Button>
+					<RequestEmailChangeForm email={user.email} />
 				</CardContent>
 			</Card>
 		</main>
