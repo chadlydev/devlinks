@@ -11,7 +11,7 @@ export default function PasswordReset({ email, url }: PasswordResetProps) {
 			<p>Hello {email},</p>
 			<a href={url}>Click to reset your password</a>
 			<p>This link expires in {RESET_PASSWORD_TOKEN_EXPIRES_IN} minutes.</p>
-			<p>Thank you, Acme Inc</p>
+			<p>Thank you, team devlinks</p>
 		</div>
 	);
 }
