@@ -5,15 +5,9 @@ import { signUpFormSchema } from '@/lib/zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { z } from 'zod';
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormInput,
-	FormItem,
-	FormLabel,
-	FormMessage
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { signUpAction } from '@/app/(auth)/sign-up/actions';
+import { toast } from 'sonner';
 
 type TSignUpForm = z.infer<typeof signUpFormSchema>;
 
@@ -26,12 +20,20 @@ export default function SignUpForm() {
 			confirmPassword: ''
 		}
 	});
+
 	const {
+		reset,
 		formState: { isSubmitting, isDirty }
 	} = form;
 
-	const onSubmit = async (values: TSignUpForm) => {
-		console.log(values);
+	const onSubmit = async (formData: TSignUpForm) => {
+		const result = await signUpAction(formData);
+		if (result.error) {
+			toast.error(result.error);
+			reset();
+		} else if (result.success) {
+			toast.success(result.success);
+		}
 	};
 
 	return (
