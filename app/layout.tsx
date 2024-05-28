@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import ThemeProvider from '@/components/theme-provider';
 import { SessionContextProvider } from '@/contexts/session-context';
 import { validateRequest } from '@/lib/server-utils';
+import { Toaster } from '@/components/ui/sonner';
 
 const mori = localFont({
 	src: [
@@ -56,6 +57,7 @@ export default async function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
+					<Toaster />
 					<SessionContextProvider value={session}>{children}</SessionContextProvider>
 				</ThemeProvider>
 			</body>
