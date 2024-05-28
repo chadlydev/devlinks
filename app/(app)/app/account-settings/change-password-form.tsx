@@ -1,6 +1,14 @@
 'use client';
 
-import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormInput,
+	FormItem,
+	FormLabel,
+	FormMessage
+} from '@/components/ui/form';
 
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -27,8 +35,8 @@ export default function ChangePasswordForm() {
 		formState: { isSubmitting, isDirty }
 	} = form;
 
-	const onSubmit = (values: TChangePasswordForm) => {
-		console.log(values);
+	const onSubmit = (formData: TChangePasswordForm) => {
+		console.log(formData);
 	};
 
 	return (

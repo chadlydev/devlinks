@@ -34,8 +34,8 @@ export default function ChangeEmailForm() {
 		formState: { isSubmitting, isDirty }
 	} = form;
 
-	const onSubmit = (values: TChangeEmailForm) => {
-		console.log(values);
+	const onSubmit = (formData: TChangeEmailForm) => {
+		console.log(formData);
 	};
 
 	return (

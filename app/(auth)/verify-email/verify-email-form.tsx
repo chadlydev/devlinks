@@ -33,8 +33,8 @@ export default function VerifyEmailForm() {
 		formState: { isSubmitting, isDirty, isValid }
 	} = form;
 
-	const onSubmit = async (values: TVerifyEmailForm) => {
-		const result = await verifyEmailAction(values);
+	const onSubmit = async (formData: TVerifyEmailForm) => {
+		const result = await verifyEmailAction(formData);
 		if (result.error) {
 			toast.error(result.error);
 			reset();

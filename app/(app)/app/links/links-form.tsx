@@ -41,8 +41,8 @@ export default function LinksForm() {
 		formState: { isSubmitting, isDirty }
 	} = form;
 
-	const onSubmit = async (values: TLinksForm) => {
-		console.log(values);
+	const onSubmit = async (formData: TLinksForm) => {
+		console.log(formData);
 	};
 
 	const fieldArray = useFieldArray({

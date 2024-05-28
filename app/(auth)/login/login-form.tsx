@@ -3,7 +3,15 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormInput,
+	FormItem,
+	FormLabel,
+	FormMessage
+} from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { loginFormSchema } from '@/lib/zod';
@@ -27,8 +35,8 @@ export default function LoginForm() {
 		formState: { isSubmitting, isDirty }
 	} = form;
 
-	const onSubmit = async (values: TLoginForm) => {
-		const result = await loginAction(values);
+	const onSubmit = async (formData: TLoginForm) => {
+		const result = await loginAction(formData);
 		if (result.error) {
 			toast.error(result.error);
 			reset();

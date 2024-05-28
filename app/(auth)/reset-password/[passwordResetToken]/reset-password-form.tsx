@@ -37,8 +37,8 @@ export default function ResetPasswordForm() {
 	const params = useParams();
 	const passwordResetToken = params.passwordResetToken as string;
 
-	const onSubmit = async (values: TResetPasswordForm) => {
-		const result = await resetPasswordAction(values, passwordResetToken);
+	const onSubmit = async (formData: TResetPasswordForm) => {
+		const result = await resetPasswordAction(formData, passwordResetToken);
 		if (result.error) {
 			toast.error(result.error);
 			reset();

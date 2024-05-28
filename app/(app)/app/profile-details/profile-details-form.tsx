@@ -1,6 +1,14 @@
 'use client';
 
-import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormInput,
+	FormItem,
+	FormLabel,
+	FormMessage
+} from '@/components/ui/form';
 
 import React, { useEffect } from 'react';
 import { z } from 'zod';
@@ -31,8 +39,8 @@ export default function ProfileDetailsForm() {
 		formState: { isSubmitting, isDirty }
 	} = form;
 
-	const onSubmit = (values: TProfileDetailsForm) => {
-		console.log(values);
+	const onSubmit = (formData: TProfileDetailsForm) => {
+		console.log(formData);
 	};
 
 	useEffect(() => {
