@@ -14,6 +14,8 @@ import {
 	FormMessage
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
+import { requestPasswordResetAction } from '@/app/(auth)/reset-password/actions';
+import { toast } from 'sonner';
 
 type TRequestPasswordResetForm = z.infer<typeof emailFormSchema>;
 
@@ -26,13 +28,20 @@ export default function RequestPasswordResetForm() {
 	});
 
 	const {
+		reset,
 		formState: { isSubmitting, isDirty }
 	} = form;
 
 	const onSubmit = async (values: TRequestPasswordResetForm) => {
-		console.log(values);
+		const result = await requestPasswordResetAction(values);
+		if (result.error) {
+			toast.error(result.error);
+			reset();
+		} else if (result.success) {
+			toast.info(result.success);
+			reset();
+		}
 	};
-
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='grid gap-4'>

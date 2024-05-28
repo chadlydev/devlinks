@@ -15,6 +15,8 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
+import { resetPasswordAction } from '@/app/(auth)/reset-password/[passwordResetToken]/actions';
+import { toast } from 'sonner';
 
 type TResetPasswordForm = z.infer<typeof resetPasswordFormSchema>;
 
@@ -28,6 +30,7 @@ export default function ResetPasswordForm() {
 	});
 
 	const {
+		reset,
 		formState: { isSubmitting, isDirty }
 	} = form;
 
@@ -35,7 +38,13 @@ export default function ResetPasswordForm() {
 	const passwordResetToken = params.passwordResetToken as string;
 
 	const onSubmit = async (values: TResetPasswordForm) => {
-		console.log(values);
+		const result = await resetPasswordAction(values, passwordResetToken);
+		if (result.error) {
+			toast.error(result.error);
+			reset();
+		} else if (result.success) {
+			toast.success(result.success);
+		}
 	};
 
 	return (
