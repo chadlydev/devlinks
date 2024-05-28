@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 import { Link, User } from '@/lib/types';
 
 type Data = {
-	user: User;
+	user: Omit<User, 'hashedPassword' | 'emailVerified' | 'id'>;
 	links: Link[];
 };
 
@@ -14,7 +14,7 @@ type ProfileContextProviderProps = {
 };
 
 type TProfileContext = {
-	user: User;
+	user: Omit<User, 'hashedPassword' | 'emailVerified' | 'id'>;
 	links: Link[];
 	handleChangeLinks: (links: Link[]) => void;
 	handleChangeUserProfilePicture: (url: User['profilePictureUrl']) => void;
