@@ -4,7 +4,6 @@ import Link from 'next/link';
 import {
 	ROUTE_ACCOUNT_SETTINGS,
 	ROUTE_LINKS,
-	ROUTE_PREVIEW_PAGE,
 	ROUTE_PROFILE_DETAILS,
 	ROUTE_ROOT
 } from '@/lib/constants';
@@ -18,6 +17,7 @@ import { Small } from '@/components/typography';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import LogoutButton from '@/app/(app)/app/logout-button';
+import { useSessionContext } from '@/contexts/session-context';
 
 const navigation = [
 	{
@@ -36,7 +36,7 @@ const navigation = [
 		icon: <SettingsIcon size={16} />
 	},
 	{
-		href: ROUTE_PREVIEW_PAGE,
+		href: '',
 		name: 'Preview',
 		icon: <EyeIcon size={16} />
 	}
@@ -45,6 +45,9 @@ const navigation = [
 export default function Header() {
 	const pathname = usePathname();
 	const [menuOpen, setMenuOpen] = useState(false);
+	const { user } = useSessionContext();
+
+	if (!user) return;
 
 	return (
 		<header className='bg-card fixed left-0 right-0 top-0 z-10 flex h-16 items-center justify-between border-b px-4 md:m-6 md:grid md:grid-cols-3 md:rounded-xl md:border'>
@@ -57,7 +60,7 @@ export default function Header() {
 					{navigation.map((route, i) => (
 						<li key={i}>
 							<Link
-								href={route.href}
+								href={route.name === 'Preview' ? `/${user.id}` : route.href}
 								className={cn(
 									'hover:text-primary ring-offset-background focus-visible:ring-ring inline-flex h-10 w-full min-w-14 items-center justify-center whitespace-nowrap rounded-lg px-3 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 lg:gap-2 lg:text-sm lg:font-semibold',
 									{
@@ -86,7 +89,7 @@ export default function Header() {
 							{navigation.map((route, i) => (
 								<li key={i} onClick={() => setMenuOpen(false)}>
 									<Link
-										href={route.href}
+										href={route.name === 'Preview' ? `/${user.id}` : route.href}
 										className={cn(
 											'ring-offset-background focus-visible:ring-ring ml-[-0.65rem] inline-flex h-10 w-full items-center gap-4 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ',
 											{
