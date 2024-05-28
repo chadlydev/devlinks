@@ -1,6 +1,11 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { GithubIcon, GoogleIcon } from '@/components/icons';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle
+} from '@/components/ui/card';
 import Separator from '@/components/separator';
 import { Small } from '@/components/typography';
 import Link from 'next/link';
@@ -8,6 +13,7 @@ import { ROUTE_GET_STARTED, ROUTE_LOGIN } from '@/lib/constants';
 import SignUpForm from '@/app/(auth)/sign-up/sign-up-form';
 import { validateRequest } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
+import OAuthButton from '@/app/(auth)/oauth-button';
 
 export default async function SignUpPage() {
 	const { user } = await validateRequest();
@@ -22,14 +28,8 @@ export default async function SignUpPage() {
 				</CardHeader>
 				<CardContent className='flex flex-col gap-6'>
 					<div className='grid gap-2'>
-						<Button variant='outline' type='button' className='gap-2'>
-							<GoogleIcon size={16} />
-							Sign up with Google
-						</Button>
-						<Button variant='outline' type='button' className='gap-2'>
-							<GithubIcon size={16} />
-							Sign up with GitHub
-						</Button>
+						<OAuthButton provider='google'>Sign up with Google</OAuthButton>
+						<OAuthButton provider='github'>Sign up with GitHub</OAuthButton>
 					</div>
 					<Separator>or continue with</Separator>
 					<SignUpForm />

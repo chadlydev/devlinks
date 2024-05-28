@@ -10,11 +10,10 @@ import LoginForm from '@/app/(auth)/login/login-form';
 import Link from 'next/link';
 import { ROUTE_GET_STARTED, ROUTE_SIGN_UP } from '@/lib/constants';
 import { Small } from '@/components/typography';
-import { Button } from '@/components/ui/button';
 import Separator from '@/components/separator';
-import { GithubIcon, GoogleIcon } from '@/components/icons';
 import { validateRequest } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
+import OAuthButton from '@/app/(auth)/oauth-button';
 
 export default async function LoginPage() {
 	const { user } = await validateRequest();
@@ -29,14 +28,8 @@ export default async function LoginPage() {
 				</CardHeader>
 				<CardContent className='flex flex-col gap-6'>
 					<div className='grid gap-2'>
-						<Button variant='outline' type='button' className='gap-2'>
-							<GoogleIcon size={16} />
-							Login with Google
-						</Button>
-						<Button variant='outline' type='button' className='gap-2'>
-							<GithubIcon size={16} />
-							Login with GitHub
-						</Button>
+						<OAuthButton provider='google'>Login with Google</OAuthButton>
+						<OAuthButton provider='github'>Login with GitHub</OAuthButton>
 					</div>
 					<Separator>or continue with</Separator>
 					<LoginForm />
