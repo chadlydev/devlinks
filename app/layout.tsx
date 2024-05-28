@@ -4,6 +4,8 @@ import localFont from 'next/font/local';
 import '@/lib/globals.css';
 import { cn } from '@/lib/utils';
 import ThemeProvider from '@/components/theme-provider';
+import { SessionContextProvider } from '@/contexts/session-context';
+import { validateRequest } from '@/lib/server-utils';
 
 const mori = localFont({
 	src: [
@@ -35,11 +37,13 @@ export const viewport: Viewport = {
 	userScalable: false
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const session = await validateRequest();
+
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body
@@ -52,7 +56,7 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					{children}
+					<SessionContextProvider value={session}>{children}</SessionContextProvider>
 				</ThemeProvider>
 			</body>
 		</html>
