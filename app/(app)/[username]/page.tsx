@@ -1,4 +1,4 @@
-import PreviewContent from '@/app/(app)/preview/preview-content';
+import PreviewContent from '@/app/(app)/[username]/preview-content';
 
 export default function PreviewPage() {
 	return (
