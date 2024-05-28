@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { loginFormSchema } from '@/lib/zod';
 import { ROUTE_RESET_PASSWORD } from '@/lib/constants';
+import { loginAction } from '@/app/(auth)/login/actions';
+import { toast } from 'sonner';
 
 type TLoginForm = z.infer<typeof loginFormSchema>;
 
@@ -21,11 +23,18 @@ export default function LoginForm() {
 	});
 
 	const {
+		reset,
 		formState: { isSubmitting, isDirty }
 	} = form;
 
 	const onSubmit = async (values: TLoginForm) => {
-		console.log(values);
+		const result = await loginAction(values);
+		if (result.error) {
+			toast.error(result.error);
+			reset();
+		} else if (result.success) {
+			toast.success(result.success);
+		}
 	};
 
 	return (
