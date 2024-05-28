@@ -11,19 +11,13 @@ import {
 import { LogoIcon } from '@/components/icons/logo-icon';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-	AccountIcon,
-	EyeIcon,
-	LinkIcon,
-	LogoutIcon,
-	MenuIcon,
-	SettingsIcon
-} from '@/components/icons';
+import { AccountIcon, EyeIcon, LinkIcon, MenuIcon, SettingsIcon } from '@/components/icons';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import ThemeDropdownMenu from '@/components/theme-dropdown-menu';
 import { Small } from '@/components/typography';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import LogoutButton from '@/app/(app)/app/logout-button';
 
 const navigation = [
 	{
@@ -112,10 +106,7 @@ export default function Header() {
 						<Small>Theme</Small>
 						<ThemeDropdownMenu />
 					</div>
-					<Button>
-						<LogoutIcon size={16} />
-						Logout
-					</Button>
+					<LogoutButton />
 				</SheetContent>
 			</Sheet>
 		</header>
