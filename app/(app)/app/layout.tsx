@@ -1,8 +1,14 @@
 import React from 'react';
 import Header from '@/app/(app)/app/header';
 import PhoneMockup from '@/app/(app)/app/phone-mockup';
+import { validateRequest } from '@/lib/server-utils';
+import { redirect } from 'next/navigation';
+import { ROUTE_GET_STARTED } from '@/lib/constants';
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
+	const { user } = await validateRequest();
+	if (user && !user.emailVerified) return redirect(ROUTE_GET_STARTED);
+
 	return (
 		<div className='flex min-h-svh flex-col'>
 			<Header />

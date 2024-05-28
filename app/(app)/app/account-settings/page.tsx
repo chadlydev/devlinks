@@ -3,8 +3,15 @@ import ChangePasswordForm from '@/app/(app)/app/account-settings/change-password
 import ChangeEmailForm from '@/app/(app)/app/account-settings/change-email-form';
 import { Large } from '@/components/typography';
 import { Button } from '@/components/ui/button';
+import { validateRequest } from '@/lib/server-utils';
+import { redirect } from 'next/navigation';
+import { ROUTE_GET_STARTED, ROUTE_SIGN_UP } from '@/lib/constants';
 
-export default function Page() {
+export default async function Page() {
+	const { user } = await validateRequest();
+	if (!user) return redirect(ROUTE_SIGN_UP);
+	if (!user.emailVerified) return redirect(ROUTE_GET_STARTED);
+
 	return (
 		<main className='flex h-full flex-grow flex-col lg:ml-[504px]'>
 			<Card>

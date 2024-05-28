@@ -1,8 +1,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import ProfilePictureForm from '@/app/(app)/app/profile-details/profile-picture-form';
 import ProfileDetailsForm from '@/app/(app)/app/profile-details/profile-details-form';
+import { validateRequest } from '@/lib/server-utils';
+import { redirect } from 'next/navigation';
+import { ROUTE_GET_STARTED, ROUTE_SIGN_UP } from '@/lib/constants';
 
-export default function ProfileDetailsPage() {
+export default async function ProfileDetailsPage() {
+	const { user } = await validateRequest();
+	if (!user) return redirect(ROUTE_SIGN_UP);
+	if (!user.emailVerified) return redirect(ROUTE_GET_STARTED);
+
 	return (
 		<main className='flex h-full flex-grow flex-col lg:ml-[504px]'>
 			<Card>

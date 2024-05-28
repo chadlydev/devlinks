@@ -1,7 +1,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import VerifyEmailForm from '@/app/(auth)/verify-email/verify-email-form';
+import { validateRequest } from '@/lib/server-utils';
+import { ROUTE_SIGN_UP } from '@/lib/constants';
+import { redirect } from 'next/navigation';
 
-export default function VerifyEmailPage() {
+export default async function VerifyEmailPage() {
+	const { user } = await validateRequest();
+	if (!user) return redirect(ROUTE_SIGN_UP);
+
 	return (
 		<Card className='sm:w-[25rem]'>
 			<CardHeader>

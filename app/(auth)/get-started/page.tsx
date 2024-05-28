@@ -5,8 +5,13 @@ import { Button } from '@/components/ui/button';
 import { ROUTE_SIGN_UP } from '@/lib/constants';
 import { ArrowLeftIcon } from '@/components/icons';
 import Link from '@/components/link';
+import { validateRequest } from '@/lib/server-utils';
+import { redirect } from 'next/navigation';
 
-export default function GetStartedPage() {
+export default async function GetStartedPage() {
+	const { user } = await validateRequest();
+	if (!user) return redirect(ROUTE_SIGN_UP);
+
 	return (
 		<main className='flex flex-col gap-4'>
 			<Link href={ROUTE_SIGN_UP}>

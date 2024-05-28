@@ -1,13 +1,25 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle
+} from '@/components/ui/card';
 import LoginForm from '@/app/(auth)/login/login-form';
 import Link from 'next/link';
-import { ROUTE_SIGN_UP } from '@/lib/constants';
+import { ROUTE_GET_STARTED, ROUTE_SIGN_UP } from '@/lib/constants';
 import { Small } from '@/components/typography';
 import { Button } from '@/components/ui/button';
 import Separator from '@/components/separator';
 import { GithubIcon, GoogleIcon } from '@/components/icons';
+import { validateRequest } from '@/lib/server-utils';
+import { redirect } from 'next/navigation';
 
-export default function LoginPage() {
+export default async function LoginPage() {
+	const { user } = await validateRequest();
+	if (user && !user.emailVerified) return redirect(ROUTE_GET_STARTED);
+
 	return (
 		<main>
 			<Card className='sm:w-[25rem]'>
