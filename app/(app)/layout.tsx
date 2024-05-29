@@ -17,9 +17,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
 	if (user) {
 		data = {
 			user: {
-				name: user.name === null ? '' : user.name,
-				email: user.email === null ? '' : user.email,
-				profilePictureUrl: user.profilePictureUrl === null ? '' : user.profilePictureUrl
+				name: user.name ? user.name : '',
+				email: user.email ? user.email : '',
+				profilePictureUrl: user.profilePictureUrl ? user.profilePictureUrl : ''
 			},
 			links: []
 		};
