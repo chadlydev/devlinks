@@ -38,7 +38,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
 				info: <InfoIcon size={20} />,
 				loading: <LoaderCircleIcon size={20} className='animate-spin' />
 			}}
-			position='top-center'
+			position='bottom-center'
 			{...props}
 		/>
 	);
