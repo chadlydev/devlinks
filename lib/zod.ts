@@ -55,7 +55,7 @@ export const profileDetailsFormSchema = z.object({
 		.refine((value) => /^[A-Za-z\s]+$/.test(value), {
 			message: "Name can't have symbols or numbers."
 		}),
-	email: z.string().email({ message: 'Please enter a valid email address' }).max(100)
+	displayEmail: z.string().email({ message: 'Please enter a valid email address' }).max(100)
 });
 
 export const changePasswordFormSchema = z
