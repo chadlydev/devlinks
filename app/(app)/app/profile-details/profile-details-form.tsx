@@ -1,14 +1,6 @@
 'use client';
 
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormInput,
-	FormItem,
-	FormLabel,
-	FormMessage
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 import React, { useEffect } from 'react';
 import { z } from 'zod';
@@ -92,13 +84,15 @@ export default function ProfileDetailsForm() {
 						</FormItem>
 					)}
 				/>
-				<Button
-					className='md:ml-auto md:w-[calc(100%-248px)] lg:w-[calc(100%-328px)]'
-					variant='secondary'
-					disabled={isSubmitting || !isDirty}
-				>
-					Save changes
-				</Button>
+				{isDirty && (
+					<Button
+						className='md:ml-auto md:w-[calc(100%-248px)] lg:w-[calc(100%-328px)]'
+						variant='secondary'
+						disabled={isSubmitting || !isDirty}
+					>
+						Save changes
+					</Button>
+				)}
 			</form>
 		</Form>
 	);
