@@ -16,7 +16,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { useProfileContext } from '@/contexts/profile-context';
-import { User } from '@/lib/types';
+import { TUser } from '@/lib/types';
 import { profileDetailsFormSchema } from '@/lib/zod';
 import { toast } from 'sonner';
 import { updateProfileDetailsAction } from '@/app/(app)/app/profile-details/actions';
@@ -50,7 +50,7 @@ export default function ProfileDetailsForm() {
 
 	useEffect(() => {
 		const subscription = watch(({ name, displayEmail }) => {
-			handleChangeUserDetails(name as User['name'], displayEmail as User['displayEmail']);
+			handleChangeUserDetails(name as TUser['name'], displayEmail as TUser['displayEmail']);
 		});
 
 		return () => subscription.unsubscribe();
