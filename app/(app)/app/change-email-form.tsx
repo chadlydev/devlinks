@@ -24,13 +24,11 @@ type TChangeEmailForm = z.infer<typeof changeEmailFormSchema>;
 export default function ChangeEmailForm() {
 	const { user } = useSessionContext();
 
-	if (!user) return;
-
 	const form = useForm<TChangeEmailForm>({
 		resolver: zodResolver(changeEmailFormSchema),
 		defaultValues: {
 			password: '',
-			email: user.email
+			email: user?.email || ''
 		}
 	});
 
