@@ -80,14 +80,15 @@ export default function ChangeEmailForm() {
 						</FormItem>
 					)}
 				/>
-
-				<Button
-					className='md:ml-auto md:w-[calc(100%-248px)] lg:w-[calc(100%-328px)]'
-					variant='secondary'
-					disabled={isSubmitting || !isDirty}
-				>
-					Save changes
-				</Button>
+				{isDirty && (
+					<Button
+						className='md:ml-auto md:w-[calc(100%-248px)] lg:w-[calc(100%-328px)]'
+						variant='secondary'
+						disabled={isSubmitting || !isDirty}
+					>
+						Save changes
+					</Button>
+				)}
 			</form>
 		</Form>
 	);
