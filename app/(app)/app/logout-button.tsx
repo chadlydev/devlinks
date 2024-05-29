@@ -4,6 +4,8 @@ import { useTransition } from 'react';
 import { toast } from 'sonner';
 import { logoutAction } from '@/app/(app)/app/actions';
 import { Button } from '@/components/ui/button';
+import { redirect } from 'next/navigation';
+import { ROUTE_ROOT } from '@/lib/constants';
 
 export default function LogoutButton() {
 	const [isPending, startTransition] = useTransition();
@@ -16,6 +18,7 @@ export default function LogoutButton() {
 				toast.error(result.error);
 			} else if (result.success) {
 				toast.success(result.success);
+				redirect(ROUTE_ROOT);
 			}
 		});
 	};
