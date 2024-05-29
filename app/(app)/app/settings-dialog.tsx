@@ -39,7 +39,7 @@ export default function SettingsDialog() {
 						<SettingsIcon size={16} />
 					</Button>
 				</DialogTrigger>
-				<DialogContent className='sm:max-w-[425px]'>
+				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>Account Settings</DialogTitle>
 						<DialogDescription>Manage password, and email.</DialogDescription>
@@ -58,7 +58,7 @@ export default function SettingsDialog() {
 				</Button>
 			</DrawerTrigger>
 			<DrawerContent className='p-4 pb-8'>
-				<DrawerHeader className='p-0 py-4  text-left'>
+				<DrawerHeader className='p-0 pb-4 pt-6  text-left'>
 					<DrawerTitle>Account Settings</DrawerTitle>
 					<DrawerDescription>Manage password, and email.</DrawerDescription>
 				</DrawerHeader>
