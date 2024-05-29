@@ -2,7 +2,7 @@
 
 import { argon2id, invalidateUserSessions, validateRequest } from '@/lib/server-utils';
 import { getErrorMessage } from '@/lib/utils';
-import { changePasswordFormSchema } from '@/lib/zod';
+import { changeEmailFormSchema, changePasswordFormSchema } from '@/lib/zod';
 import { eq } from 'drizzle-orm';
 import { db } from '@/db';
 import { userTable } from '@/db/schema';
@@ -71,6 +71,56 @@ export async function changePasswordAction(formData: unknown) {
 			.update(userTable)
 			.set({ hashedPassword: newHashedPassword })
 			.where(eq(userTable.id, currentUser.id));
+
+		return {
+			success: 'Password changed successfully'
+		};
+	} catch (error: unknown) {
+		return {
+			error: getErrorMessage(error)
+		};
+	}
+}
+
+export async function changeEmailAction(formData: unknown) {
+	// Validate formData
+	const validatedFormData = changeEmailFormSchema.safeParse(formData);
+	if (!validatedFormData.success) {
+		return {
+			error: 'Invalid data'
+		};
+	}
+
+	const { password, email } = validatedFormData.data;
+
+	const { user } = await validateRequest();
+
+	if (!user) {
+		return {
+			error: 'Not authenticated'
+		};
+	}
+
+	try {
+		// 	check current password
+		const currentUser = await db.query.userTable.findFirst({ where: eq(userTable.id, user.id) });
+		if (!currentUser) {
+			return {
+				error: 'No user found'
+			};
+		}
+
+		const validPassword = await argon2id.verify(currentUser.hashedPassword!, password);
+
+		if (!validPassword) {
+			return {
+				error: 'Invalid password'
+			};
+		}
+
+		// Check for existing email change token, if there is one, return error
+
+		// send email to old & new email address, submit change when both verified the change?
 
 		return {
 			success: 'Password changed successfully'

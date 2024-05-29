@@ -15,26 +15,42 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { changeEmailFormSchema } from '@/lib/zod';
+import { changeEmailAction } from '@/app/(app)/app/actions';
+import { toast } from 'sonner';
+import { useSessionContext } from '@/contexts/session-context';
 
-export type TChangeEmailForm = z.infer<typeof changeEmailFormSchema>;
+type TChangeEmailForm = z.infer<typeof changeEmailFormSchema>;
 
 export default function ChangeEmailForm() {
+	const { user } = useSessionContext();
+
+	if (!user) return;
+
 	const form = useForm<TChangeEmailForm>({
 		resolver: zodResolver(changeEmailFormSchema),
 		defaultValues: {
 			password: '',
-			email: ''
+			email: user.email
 		}
 	});
 
 	const {
 		reset,
 		setError,
+		resetField,
 		formState: { isSubmitting, isDirty }
 	} = form;
 
-	const onSubmit = (formData: TChangeEmailForm) => {
-		console.log(formData);
+	const onSubmit = async (values: TChangeEmailForm) => {
+		const result = await changeEmailAction(values);
+
+		if (result.error) {
+			resetField('password');
+			setError('password', { message: result.error });
+		} else if (result.success) {
+			toast.success(result.success);
+			reset();
+		}
 	};
 
 	return (
