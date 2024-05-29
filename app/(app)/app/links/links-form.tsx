@@ -12,17 +12,9 @@ import LinkItem from '@/app/(app)/app/links/link-item';
 import { useProfileContext } from '@/contexts/profile-context';
 import { useEffect } from 'react';
 import { Link } from '@/lib/types';
-
-const linkObject = z.object({
-	platform: z
-		.string({ required_error: 'This field is required' })
-		.min(1, { message: 'Pick a platform' }),
-	url: z.string({ required_error: 'This field is required' }).url({ message: 'Invalid URL' })
-});
-
-const linksFormSchema = z.object({
-	links: z.array(linkObject)
-});
+import { linksFormSchema } from '@/lib/zod';
+import { toast } from 'sonner';
+import { updateLinksAction } from '@/app/(app)/app/links/actions';
 
 type TLinksForm = z.infer<typeof linksFormSchema>;
 
@@ -42,7 +34,12 @@ export default function LinksForm() {
 	} = form;
 
 	const onSubmit = async (formData: TLinksForm) => {
-		console.log(formData);
+		const result = await updateLinksAction(formData);
+		if (result.error) {
+			toast.error(result.error);
+		} else if (result.success) {
+			toast.success(result.success);
+		}
 	};
 
 	const fieldArray = useFieldArray({
