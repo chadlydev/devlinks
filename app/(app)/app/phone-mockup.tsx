@@ -1,7 +1,7 @@
 'use client';
 
 import { Large, Small } from '@/components/typography';
-import { SocialButton } from '@/components/social-button';
+import { SocialLink } from '@/components/social-link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useProfileContext } from '@/contexts/profile-context';
 import { PlatformValue } from '@/lib/types';
@@ -65,7 +65,7 @@ export default function PhoneMockup() {
 						.slice(0, 5)
 						.filter((link) => link.platform)
 						.map((link, index) => (
-							<SocialButton key={index} variant={link.platform as PlatformValue} />
+							<SocialLink key={index} variant={link.platform as PlatformValue} />
 						))}
 				</div>
 

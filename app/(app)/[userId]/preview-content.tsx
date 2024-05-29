@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AccountIcon } from '@/components/icons';
 import { Large, Small } from '@/components/typography';
-import { SocialButton } from '@/components/social-button';
+import { SocialLink } from '@/components/social-link';
 import { Link, PlatformValue } from '@/lib/types';
 
 // TODO extract type
@@ -39,7 +39,7 @@ export default function PreviewContent({
 				{links
 					.filter((link) => link.platform)
 					.map((link, index) => (
-						<SocialButton key={index} variant={link.platform as PlatformValue} />
+						<SocialLink key={index} variant={link.platform as PlatformValue} href={link.url} />
 					))}
 			</div>
 		</div>

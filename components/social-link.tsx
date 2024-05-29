@@ -56,7 +56,7 @@ const platformLabels: PlatformLabels = {
 	stackoverflow: 'Stack Overflow'
 };
 
-type ButtonVariantProps = VariantProps<typeof buttonVariants>;
+type LinkVariantProps = VariantProps<typeof buttonVariants>;
 const buttonVariants = cva(
 	'ring-offset-background focus-visible:ring-ring inline-flex h-10 w-full flex-shrink-0 items-center justify-start gap-2.5 whitespace-nowrap rounded-md px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
 	{
@@ -82,24 +82,30 @@ const buttonVariants = cva(
 	}
 );
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-	Omit<ButtonVariantProps, 'variant'> &
-	Required<Pick<ButtonVariantProps, 'variant'>> & {};
+export type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+	Omit<LinkVariantProps, 'variant'> &
+	Required<Pick<LinkVariantProps, 'variant'>> & {};
 
-const SocialButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-	({ className, variant, ...props }, ref) => {
+const SocialLink = React.forwardRef<HTMLAnchorElement, LinkProps>(
+	({ className, variant, href, ...props }, ref) => {
 		const Icon = platformIcons[variant!];
 		const label = platformLabels[variant!];
 
 		return (
-			<button className={cn(buttonVariants({ variant, className }))} ref={ref} {...props}>
+			<a
+				className={cn(buttonVariants({ variant, className }))}
+				ref={ref}
+				href={href}
+				{...props}
+				target='_blank'
+			>
 				<Icon size={16} />
 				{label}
 				<ArrowRightIcon size={16} className='ml-auto' />
-			</button>
+			</a>
 		);
 	}
 );
-SocialButton.displayName = 'Button';
+SocialLink.displayName = 'Button';
 
-export { SocialButton };
+export { SocialLink };
