@@ -53,7 +53,7 @@ export default function PhoneMockup() {
 							<Skeleton className='h-7 w-48 animate-none' />
 						)}
 						{user.email ? (
-							<Small>{user.email}</Small>
+							<Small>{user.displayEmail}</Small>
 						) : (
 							<Skeleton className='h-3.5 w-28 animate-none' />
 						)}
