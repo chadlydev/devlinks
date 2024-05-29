@@ -33,7 +33,7 @@ export type TPlatformLabel =
 	| 'Stack Overflow';
 
 export type TLink = {
-	platform: TPlatformValue;
+	platform: TPlatformValue | string;
 	url: string;
 };
 
