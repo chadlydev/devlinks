@@ -89,3 +89,14 @@ export const changeEmailFormSchema = z.object({
 		.max(100, { message: 'Cannot exceed 100 character(s)' }),
 	email: z.string().email({ message: 'Please enter a valid email address' }).max(100)
 });
+
+const linkObject = z.object({
+	platform: z
+		.string({ required_error: 'This field is required' })
+		.min(1, { message: 'Pick a platform' }),
+	url: z.string({ required_error: 'This field is required' }).url({ message: 'Invalid URL' })
+});
+
+export const linksFormSchema = z.object({
+	links: z.array(linkObject)
+});
