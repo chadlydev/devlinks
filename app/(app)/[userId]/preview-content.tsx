@@ -27,9 +27,8 @@ export default function PreviewContent() {
 				</div>
 			</div>
 
-			<div className='z-10 flex w-full flex-col items-center gap-6'>
+			<div className='z-10 flex w-full flex-col items-center gap-4'>
 				{links
-					.slice(0, 5)
 					.filter((link) => link.platform)
 					.map((link, index) => (
 						<SocialButton key={index} variant={link.platform as PlatformValue} />
