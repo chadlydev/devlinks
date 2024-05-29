@@ -62,13 +62,13 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				github: 'bg-github text-white hover:bg-github/80',
-				x: 'bg-x text-white hover:bg-x/80 dark:hover:bg-x/60',
+				github: 'bg-github text-white hover:bg-github/80 dark:border',
+				x: 'bg-x text-white hover:bg-x/80 dark:hover:bg-x/60 dark:border',
 				linkedin: 'bg-linkedin text-white hover:bg-linkedin/80',
 				youtube: 'bg-youtube text-white hover:bg-youtube/80',
 				facebook: 'bg-facebook text-white hover:bg-facebook/80',
 				twitch: 'bg-twitch text-white hover:bg-twitch/80',
-				devto: 'bg-devto text-white hover:bg-devto/50',
+				devto: 'bg-devto text-white hover:bg-devto/50 dark:border',
 				codewars: 'bg-codewars text-white hover:bg-codewars/80',
 				freecodecamp: 'bg-freecodecamp text-white hover:bg-freecodecamp/60',
 				gitlab: 'bg-gitlab text-white hover:bg-gitlab/80',
