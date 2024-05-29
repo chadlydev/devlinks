@@ -19,6 +19,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AccountIcon } from '@/components/icons';
 import { useProfileContext } from '@/contexts/profile-context';
 import { profilePictureFormSchema } from '@/lib/zod';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+import { getS3SignedUrlAction } from '@/app/(app)/app/profile-details/actions';
 
 export type TProfilePictureForm = z.infer<typeof profilePictureFormSchema>;
 
@@ -26,6 +29,15 @@ export default function ProfilePictureForm() {
 	const { user, handleChangeUserProfilePicture } = useProfileContext();
 	const [file, setFile] = useState<File | null | undefined>(null);
 	const [filePreviewUrl, setFilePreviewUrl] = useState<string | null>(null);
+	const router = useRouter();
+
+	const computeSHA256 = async (file: File) => {
+		const buffer = await file.arrayBuffer();
+		const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+		const hashArray = Array.from(new Uint8Array(hashBuffer));
+		const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+		return hashHex;
+	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -56,7 +68,33 @@ export default function ProfilePictureForm() {
 	} = form;
 
 	const onSubmit = async () => {
-		console.log(file);
+		if (file) {
+			const checksum = await computeSHA256(file);
+			const signedS3UrlResult = await getS3SignedUrlAction(file.type, file.size, checksum);
+
+			if (signedS3UrlResult.error !== undefined) {
+				setError('image', { message: signedS3UrlResult.error });
+			}
+
+			if (signedS3UrlResult.success) {
+				const url = signedS3UrlResult.success.url;
+
+				await fetch(url, {
+					method: 'PUT',
+					body: file,
+					headers: {
+						'Content-Type': file.type
+					}
+				});
+
+				// TODO Delete all old pictures
+
+				toast.success('Successfully updated profile picture');
+				reset();
+				setFile(null);
+				router.refresh();
+			}
+		}
 	};
 
 	return (
