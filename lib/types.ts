@@ -2,7 +2,10 @@ import { InferSelectModel } from 'drizzle-orm';
 import { userTable } from '@/db/schema';
 
 export type User = InferSelectModel<typeof userTable>;
-export type UserEssentials = Omit<User, 'hashedPassword' | 'name' | 'profilePictureUrl'>;
+export type UserEssentials = Omit<
+	User,
+	'hashedPassword' | 'name' | 'profilePictureUrl' | 'displayEmail'
+>;
 
 export type PlatformValue =
 	| 'github'
