@@ -18,6 +18,8 @@ import { Button } from '@/components/ui/button';
 import { useProfileContext } from '@/contexts/profile-context';
 import { User } from '@/lib/types';
 import { profileDetailsFormSchema } from '@/lib/zod';
+import { toast } from 'sonner';
+import { updateProfileDetailsAction } from '@/app/(app)/app/profile-details/actions';
 
 export type TProfileDetailsForm = z.infer<typeof profileDetailsFormSchema>;
 
@@ -33,14 +35,17 @@ export default function ProfileDetailsForm() {
 	});
 
 	const {
-		reset,
-		setError,
 		watch,
 		formState: { isSubmitting, isDirty }
 	} = form;
 
-	const onSubmit = (formData: TProfileDetailsForm) => {
-		console.log(formData);
+	const onSubmit = async (formData: TProfileDetailsForm) => {
+		const result = await updateProfileDetailsAction(formData);
+		if (result.error) {
+			toast.error(result.error);
+		} else if (result.success) {
+			toast.success(result.success);
+		}
 	};
 
 	useEffect(() => {
