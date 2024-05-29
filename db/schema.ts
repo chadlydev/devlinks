@@ -57,3 +57,12 @@ export const sessionTable = pgTable('session', {
 		mode: 'date'
 	}).notNull()
 });
+
+export const linkTable = pgTable('link', {
+	id: text('id').primaryKey(),
+	userId: text('user_id')
+		.notNull()
+		.references(() => userTable.id),
+	platform: text('platform').notNull(),
+	url: text('url').notNull()
+});
