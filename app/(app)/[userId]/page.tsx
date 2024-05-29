@@ -1,4 +1,4 @@
-import PreviewContent from '@/app/(app)/[userId]/preview-content';
+import PageContent from '@/app/(app)/[userId]/page-content';
 import Link from 'next/link';
 import { ROUTE_LINKS } from '@/lib/constants';
 import { ArrowLeftIcon } from '@/components/icons';
@@ -38,7 +38,7 @@ export default async function LinksPage({ params }: { params: { userId: string }
 			)}
 			<div className='bg-primary absolute -z-10 hidden h-1/3 w-full rounded-b-3xl md:block' />
 			<main className='mt-24 md:mt-56'>
-				<PreviewContent
+				<PageContent
 					links={links}
 					profileDetails={{
 						name: userResult.name!,

@@ -13,7 +13,7 @@ type ProfileDetails = {
 	displayEmail: string;
 };
 
-export default function PreviewContent({
+export default function PageContent({
 	links,
 	profileDetails
 }: {

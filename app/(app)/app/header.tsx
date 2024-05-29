@@ -14,9 +14,6 @@ import { usePathname } from 'next/navigation';
 import LogoutButton from '@/app/(app)/app/logout-button';
 import { useSessionContext } from '@/contexts/session-context';
 import SettingsDialog from '@/app/(app)/app/settings-dialog';
-import { db } from '@/db';
-import { oauthAccountTable } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 
 const navigation = [
 	{
@@ -36,16 +33,12 @@ const navigation = [
 	}
 ];
 
-export default async function Header() {
+export default function Header({ isOAuthUser }: { isOAuthUser: boolean }) {
 	const pathname = usePathname();
 	const [menuOpen, setMenuOpen] = useState(false);
 	const { user } = useSessionContext();
 
 	if (!user) return;
-
-	const isOAuthUser = await db.query.oauthAccountTable.findFirst({
-		where: eq(oauthAccountTable.userId, user.id)
-	});
 
 	return (
 		<header className='bg-card fixed left-0 right-0 top-0 z-10 flex h-16 items-center justify-between border-b px-4 md:m-6 md:grid md:grid-cols-3 md:rounded-xl md:border'>
