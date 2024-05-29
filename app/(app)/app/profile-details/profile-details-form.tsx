@@ -28,7 +28,7 @@ export default function ProfileDetailsForm() {
 		resolver: zodResolver(profileDetailsFormSchema),
 		defaultValues: {
 			name: user.name!,
-			email: user.email!
+			displayEmail: user.displayEmail!
 		}
 	});
 
@@ -44,8 +44,8 @@ export default function ProfileDetailsForm() {
 	};
 
 	useEffect(() => {
-		const subscription = watch(({ name, email }) => {
-			handleChangeUserDetails(name as User['name'], email as User['email']);
+		const subscription = watch(({ name, displayEmail }) => {
+			handleChangeUserDetails(name as User['name'], displayEmail as User['displayEmail']);
 		});
 
 		return () => subscription.unsubscribe();
@@ -62,7 +62,7 @@ export default function ProfileDetailsForm() {
 					name='name'
 					render={({ field }) => (
 						<FormItem className='md:flex md:items-center'>
-							<FormLabel className='md:min-w-60 lg:min-w-80'>Name*</FormLabel>
+							<FormLabel className='md:min-w-60 lg:min-w-80'>Display name*</FormLabel>
 							<div className='flex flex-grow flex-col gap-2'>
 								<FormControl>
 									<FormInput placeholder='John Doe' {...field} />
@@ -74,10 +74,10 @@ export default function ProfileDetailsForm() {
 				/>
 				<FormField
 					control={form.control}
-					name='email'
+					name='displayEmail'
 					render={({ field }) => (
 						<FormItem className='md:flex md:items-center'>
-							<FormLabel className='md:min-w-60 lg:min-w-80'>Email*</FormLabel>
+							<FormLabel className='md:min-w-60 lg:min-w-80'>Display email*</FormLabel>
 							<div className='flex flex-grow flex-col gap-2'>
 								<FormControl>
 									<FormInput placeholder='someone@example.com' {...field} />
