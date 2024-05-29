@@ -1,14 +1,14 @@
 import PreviewContent from '@/app/(app)/[userId]/preview-content';
 import Link from 'next/link';
 import { ROUTE_LINKS } from '@/lib/constants';
-import { ArrowLeftIcon, ShareIcon } from '@/components/icons';
-import { Button } from '@/components/ui/button';
+import { ArrowLeftIcon } from '@/components/icons';
 import React from 'react';
 import { validateRequest } from '@/lib/server-utils';
 import { db } from '@/db';
 import { eq } from 'drizzle-orm';
 import { linkTable, userTable } from '@/db/schema';
 import { notFound } from 'next/navigation';
+import ShareLinkButton from '@/app/(app)/[userId]/share-link-button';
 
 export default async function LinksPage({ params }: { params: { userId: string } }) {
 	const { user } = await validateRequest();
@@ -33,10 +33,7 @@ export default async function LinksPage({ params }: { params: { userId: string }
 					<Link href={ROUTE_LINKS} className='flex items-center gap-1 text-sm font-semibold'>
 						<ArrowLeftIcon size={16} /> Back to Editor
 					</Link>
-					<Button>
-						<ShareIcon size={16} />
-						Share Link
-					</Button>
+					<ShareLinkButton />
 				</header>
 			)}
 			<div className='bg-primary absolute -z-10 hidden h-1/3 w-full rounded-b-3xl md:block' />
