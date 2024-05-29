@@ -1,6 +1,14 @@
 'use client';
 
-import { Form, FormControl, FormField, FormInput, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormInput,
+	FormItem,
+	FormLabel,
+	FormMessage
+} from '@/components/ui/form';
 
 import React, { useEffect } from 'react';
 import { z } from 'zod';
@@ -58,8 +66,8 @@ export default function ProfileDetailsForm() {
 					control={form.control}
 					name='name'
 					render={({ field }) => (
-						<FormItem className='md:flex md:items-center'>
-							<FormLabel className='md:min-w-60 lg:min-w-80'>Display name*</FormLabel>
+						<FormItem className='md:flex md:items-center lg:gap-8 xl:gap-2'>
+							<FormLabel className='md:min-w-60 lg:min-w-fit xl:min-w-80'>Display name*</FormLabel>
 							<div className='flex flex-grow flex-col gap-2'>
 								<FormControl>
 									<FormInput placeholder='John Doe' {...field} />
@@ -73,8 +81,8 @@ export default function ProfileDetailsForm() {
 					control={form.control}
 					name='displayEmail'
 					render={({ field }) => (
-						<FormItem className='md:flex md:items-center'>
-							<FormLabel className='md:min-w-60 lg:min-w-80'>Display email*</FormLabel>
+						<FormItem className='md:flex md:items-center lg:gap-8 xl:gap-2'>
+							<FormLabel className='md:min-w-60 lg:min-w-fit xl:min-w-80'>Display email*</FormLabel>
 							<div className='flex flex-grow flex-col gap-2'>
 								<FormControl>
 									<FormInput placeholder='someone@example.com' {...field} />
@@ -86,7 +94,7 @@ export default function ProfileDetailsForm() {
 				/>
 				{isDirty && (
 					<Button
-						className='md:ml-auto md:w-[calc(100%-248px)] lg:w-[calc(100%-328px)]'
+						className='md:ml-auto md:w-[calc(100%-248px)] lg:w-[calc(100%-128px)] xl:w-[calc(100%-328px)]'
 						variant='secondary'
 						disabled={isSubmitting || !isDirty}
 					>

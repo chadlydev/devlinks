@@ -104,8 +104,10 @@ export default function ProfilePictureForm() {
 					control={form.control}
 					name='image'
 					render={({ field: { value, onChange, ...fieldProps } }) => (
-						<FormItem className='flex flex-col gap-4 md:flex-row md:items-center md:gap-2'>
-							<FormLabel className='md:min-w-60 lg:min-w-80'>Profile picture</FormLabel>
+						<FormItem className='flex flex-col gap-4 md:flex-row md:items-center md:gap-2 lg:flex-col lg:items-start lg:gap-4 xl:flex-row xl:items-center xl:gap-2'>
+							<FormLabel className='md:min-w-60 lg:min-w-fit xl:min-w-80'>
+								Profile picture
+							</FormLabel>
 							<div className='flex flex-col gap-6 md:flex-row md:items-center md:gap-8'>
 								<Avatar className='size-32 rounded-md'>
 									<AvatarImage src={filePreviewUrl || undefined} />

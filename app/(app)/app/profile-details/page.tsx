@@ -19,7 +19,7 @@ export default async function ProfileDetailsPage() {
 						Add your details to create a personal touch to your profile.
 					</CardDescription>
 				</CardHeader>
-				<CardContent className='flex flex-grow flex-col gap-6'>
+				<CardContent className='flex flex-col gap-6'>
 					<ProfilePictureForm />
 					<ProfileDetailsForm />
 				</CardContent>
