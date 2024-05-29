@@ -51,7 +51,6 @@ export default function ProfilePictureForm() {
 			const url = URL.createObjectURL(file);
 			setFilePreviewUrl(url);
 			handleChangeUserProfilePicture(url);
-			console.log(user);
 		} else {
 			setFilePreviewUrl(null);
 		}
