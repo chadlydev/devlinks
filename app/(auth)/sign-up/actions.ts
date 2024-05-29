@@ -19,6 +19,7 @@ export async function signUpAction(formData: unknown) {
 	const user = {
 		id: generateId(16),
 		email: validatedFormData.data.email,
+		displayEmail: validatedFormData.data.email,
 		hashedPassword: await argon2id.hash(validatedFormData.data.password),
 		emailVerified: false
 	};

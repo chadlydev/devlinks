@@ -6,7 +6,8 @@ export const userTable = pgTable('user', {
 	hashedPassword: text('hashed_password'),
 	emailVerified: boolean('email_verified').notNull().default(false),
 	profilePictureUrl: text('profile_picture_url'),
-	name: text('name')
+	name: text('name'),
+	displayEmail: text('display_email')
 });
 
 export const oauthAccountTable = pgTable('oauth_account', {

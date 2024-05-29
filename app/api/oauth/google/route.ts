@@ -71,6 +71,7 @@ export async function GET(request: NextRequest) {
 					.values({
 						id: userId,
 						email: googleUser.email,
+						displayEmail: googleUser.email,
 						name: googleUser.name,
 						profilePictureUrl: googleUser.picture,
 						emailVerified: true

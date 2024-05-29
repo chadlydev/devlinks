@@ -53,6 +53,7 @@ export async function GET(request: NextRequest) {
 						.values({
 							id: userId,
 							email: githubUser.email,
+							displayEmail: githubUser.email,
 							name: githubUser.name,
 							profilePictureUrl: githubUser.avatar_url,
 							emailVerified: true
