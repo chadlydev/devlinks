@@ -27,14 +27,9 @@ import {
 } from '@/components/ui/command';
 import { UseFieldArrayReturn, UseFormReturn } from 'react-hook-form';
 import { useState } from 'react';
-import { PlatformLabel, PlatformValue } from '@/lib/types';
+import { TPlatformSelectItem } from '@/lib/types';
 
-type PlatformItem = {
-	value: PlatformValue;
-	label: PlatformLabel;
-};
-
-export const platformItemList: PlatformItem[] = [
+export const platformItemList: TPlatformSelectItem[] = [
 	{ value: 'github', label: 'GitHub' },
 	{ value: 'x', label: 'X' },
 	{ value: 'linkedin', label: 'LinkedIn' },

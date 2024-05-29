@@ -1,6 +1,6 @@
 import 'server-only';
 import { Argon2id } from 'oslo/password';
-import type { User, UserEssentials } from '@/lib/types';
+import type { TUser } from '@/lib/types';
 import { lucia } from '@/lib/lucia';
 import {
 	EMAIL_VERIFICATION_EXPIRES_IN,
@@ -17,14 +17,12 @@ import { generateId } from 'lucia';
 import { createDate, isWithinExpirationDate, TimeSpan } from 'oslo';
 import { encodeHex } from 'oslo/encoding';
 
-// Todo add pepper
 export const argon2id = new Argon2id();
 
 /*------------------------------------------------------------------------------
 --- Auth
 ----------------------------------------------------------------------------- */
-export async function createSession(userId: User['id']) {
-	// TODO check if this is the right way, I'm deleting all sessions before creating a new one
+export async function createSession(userId: TUser['id']) {
 	await lucia.invalidateUserSessions(userId);
 
 	const session = await lucia.createSession(userId, {
@@ -34,7 +32,7 @@ export async function createSession(userId: User['id']) {
 	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 }
 
-export async function invalidateUserSessions(userId: User['id']) {
+export async function invalidateUserSessions(userId: TUser['id']) {
 	await lucia.invalidateUserSessions(userId);
 	const sessionCookie = lucia.createBlankSessionCookie();
 	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
@@ -88,7 +86,10 @@ export async function createEmailVerificationCode(userId: string, email: string)
 	return code;
 }
 
-export async function verifyEmailVerificationCode(user: UserEssentials, code: string) {
+export async function verifyEmailVerificationCode(
+	user: Omit<TUser, 'hashedPassword' | 'name' | 'profilePictureUrl' | 'displayEmail'>,
+	code: string
+) {
 	const databaseCode = await db.query.emailVerificationTable.findFirst({
 		where: eq(emailVerificationTable.userId, user.id)
 	});

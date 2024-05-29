@@ -27,8 +27,6 @@ export default async function PasswordResetPage({
 	}
 
 	if (!isWithinExpirationDate(databaseToken.expiresAt)) {
-		// TODO Check if toast works
-		// toast.error('Token expired');
 		return redirect(ROUTE_RESET_PASSWORD);
 	}
 

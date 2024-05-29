@@ -1,11 +1,11 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
-import { Link, User } from '@/lib/types';
+import { TLink, TUser } from '@/lib/types';
 
 type Data = {
-	user: Omit<User, 'hashedPassword' | 'emailVerified' | 'id'>;
-	links: Link[];
+	user: Omit<TUser, 'hashedPassword' | 'emailVerified' | 'id'>;
+	links: TLink[];
 };
 
 type ProfileContextProviderProps = {
@@ -14,11 +14,11 @@ type ProfileContextProviderProps = {
 };
 
 type TProfileContext = {
-	user: Omit<User, 'hashedPassword' | 'emailVerified' | 'id'>;
-	links: Link[];
-	handleChangeLinks: (links: Link[]) => void;
-	handleChangeUserProfilePicture: (url: User['profilePictureUrl']) => void;
-	handleChangeUserDetails: (name: User['name'], email: User['email']) => void;
+	user: Omit<TUser, 'hashedPassword' | 'emailVerified' | 'id'>;
+	links: TLink[];
+	handleChangeLinks: (links: TLink[]) => void;
+	handleChangeUserProfilePicture: (url: TUser['profilePictureUrl']) => void;
+	handleChangeUserDetails: (name: TUser['name'], email: TUser['email']) => void;
 };
 
 const ProfileContext = createContext<TProfileContext | null>(null);
@@ -27,18 +27,18 @@ export default function ProfileContextProvider({ data, children }: ProfileContex
 	const [user, setUser] = useState(data.user);
 	const [links, setLinks] = useState(data.links);
 
-	const handleChangeLinks = (links: Link[]) => {
+	const handleChangeLinks = (links: TLink[]) => {
 		setLinks([...links]);
 	};
 
-	const handleChangeUserProfilePicture = (url: User['profilePictureUrl']) => {
+	const handleChangeUserProfilePicture = (url: TUser['profilePictureUrl']) => {
 		setUser((prevState) => ({
 			...prevState,
 			profilePictureUrl: url
 		}));
 	};
 
-	const handleChangeUserDetails = (name: User['name'], email: User['email']) => {
+	const handleChangeUserDetails = (name: TUser['name'], email: TUser['email']) => {
 		setUser((prevState) => ({
 			...prevState,
 			name,

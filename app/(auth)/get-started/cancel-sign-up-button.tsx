@@ -30,7 +30,6 @@ export default function CancelSignUpButton() {
 			onClick={handleClick}
 			className={cn({ 'pointer-events-none': isPending })}
 			aria-disabled={isPending}
-			// tabIndex={isPending ? -1 : undefined}
 			href={ROUTE_SIGN_UP}
 		>
 			<ArrowLeftIcon size={16} /> Back to signup

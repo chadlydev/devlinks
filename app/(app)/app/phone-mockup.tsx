@@ -4,7 +4,7 @@ import { Large, Small } from '@/components/typography';
 import { SocialLink } from '@/components/social-link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useProfileContext } from '@/contexts/profile-context';
-import { PlatformValue } from '@/lib/types';
+import { TPlatformValue } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AccountIcon } from '@/components/icons';
 import React from 'react';
@@ -65,7 +65,7 @@ export default function PhoneMockup() {
 						.slice(0, 5)
 						.filter((link) => link.platform)
 						.map((link, index) => (
-							<SocialLink key={index} variant={link.platform as PlatformValue} />
+							<SocialLink key={index} variant={link.platform as TPlatformValue} />
 						))}
 				</div>
 

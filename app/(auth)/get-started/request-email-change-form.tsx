@@ -26,7 +26,7 @@ export default function RequestEmailChangeForm({ email }: { email: string }) {
 	const form = useForm<TRequestEmailChangeForm>({
 		resolver: zodResolver(emailFormSchema),
 		defaultValues: {
-			email: email
+			email
 		}
 	});
 

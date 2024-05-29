@@ -16,13 +16,9 @@ import {
 	XIcon,
 	YoutubeIcon
 } from '@/components/icons';
-import { PlatformLabel, PlatformValue } from '@/lib/types';
+import type { TPlatformIcons, TPlatformLabels } from '@/lib/types';
 
-type PlatformIcons = {
-	[K in PlatformValue]?: any;
-};
-
-const platformIcons: PlatformIcons = {
+const platformIcons: TPlatformIcons = {
 	github: GithubIcon,
 	x: XIcon,
 	linkedin: LinkedinIcon,
@@ -37,11 +33,7 @@ const platformIcons: PlatformIcons = {
 	stackoverflow: StackoverflowIcon
 };
 
-type PlatformLabels = {
-	[K in PlatformValue]?: PlatformLabel;
-};
-
-const platformLabels: PlatformLabels = {
+const platformLabels: TPlatformLabels = {
 	github: 'GitHub',
 	x: 'X',
 	linkedin: 'LinkedIn',
@@ -82,7 +74,7 @@ const buttonVariants = cva(
 	}
 );
 
-export type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
 	Omit<LinkVariantProps, 'variant'> &
 	Required<Pick<LinkVariantProps, 'variant'>> & {};
 

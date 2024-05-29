@@ -1,13 +1,10 @@
 import { InferSelectModel } from 'drizzle-orm';
 import { userTable } from '@/db/schema';
 
-export type User = InferSelectModel<typeof userTable>;
-export type UserEssentials = Omit<
-	User,
-	'hashedPassword' | 'name' | 'profilePictureUrl' | 'displayEmail'
->;
+export type TUser = InferSelectModel<typeof userTable>;
+export type TProfileDetails = Omit<TUser, 'hashedPassword' | 'id' | 'email' | 'emailVerified'>;
 
-export type PlatformValue =
+export type TPlatformValue =
 	| 'github'
 	| 'x'
 	| 'linkedin'
@@ -21,7 +18,7 @@ export type PlatformValue =
 	| 'hashnode'
 	| 'stackoverflow';
 
-export type PlatformLabel =
+export type TPlatformLabel =
 	| 'GitHub'
 	| 'X'
 	| 'LinkedIn'
@@ -35,8 +32,20 @@ export type PlatformLabel =
 	| 'Hashnode'
 	| 'Stack Overflow';
 
-// TODO Figure out why I can't use PlatformValue type
-export type Link = {
-	platform: string;
+export type TLink = {
+	platform: TPlatformValue;
 	url: string;
+};
+
+export type TPlatformSelectItem = {
+	value: TPlatformValue;
+	label: TPlatformLabel;
+};
+
+export type TPlatformIcons = {
+	[K in TPlatformValue]?: any;
+};
+
+export type TPlatformLabels = {
+	[K in TPlatformValue]?: TPlatformLabel;
 };

@@ -11,7 +11,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import LinkItem from '@/app/(app)/app/links/link-item';
 import { useProfileContext } from '@/contexts/profile-context';
 import { useEffect } from 'react';
-import { Link } from '@/lib/types';
+import { TLink } from '@/lib/types';
 import { linksFormSchema } from '@/lib/zod';
 import { toast } from 'sonner';
 import { updateLinksAction } from '@/app/(app)/app/links/actions';
@@ -51,7 +51,7 @@ export default function LinksForm() {
 
 	useEffect(() => {
 		const subscription = watch(({ links }) => {
-			handleChangeLinks(links as Link[]);
+			handleChangeLinks(links as TLink[]);
 		});
 
 		return () => subscription.unsubscribe();
