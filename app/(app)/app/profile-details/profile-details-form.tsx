@@ -57,6 +57,8 @@ export default function ProfileDetailsForm() {
 		return () => subscription.unsubscribe();
 	}, [watch]);
 
+	const isFreeUser = user.subscription !== 'pro';
+
 	return (
 		<Form {...form}>
 			<form
@@ -71,7 +73,7 @@ export default function ProfileDetailsForm() {
 							<FormLabel className='md:min-w-60 lg:min-w-fit xl:min-w-80'>URL</FormLabel>
 							<div className='flex flex-grow flex-col gap-2'>
 								<FormControl>
-									<FormInput placeholder='devlinks.dev/[url]' {...field} />
+									<FormInput placeholder='devlinks.dev/[url]' disabled={isFreeUser} {...field} />
 								</FormControl>
 								<FormMessage />
 							</div>

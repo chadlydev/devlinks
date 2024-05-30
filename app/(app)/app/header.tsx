@@ -5,10 +5,10 @@ import { ROUTE_LINKS, ROUTE_PROFILE_DETAILS, ROUTE_ROOT } from '@/lib/constants'
 import { LogoIcon } from '@/components/icons/logo-icon';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { AccountIcon, EyeIcon, LinkIcon, MenuIcon } from '@/components/icons';
+import { AccountIcon, EyeIcon, LinkIcon, MenuIcon, StarsIcon } from '@/components/icons';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import ThemeDropdownMenu from '@/components/theme-dropdown-menu';
-import { Small } from '@/components/typography';
+import { Large, Small } from '@/components/typography';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import LogoutButton from '@/app/(app)/app/logout-button';
@@ -40,11 +40,23 @@ export default function Header({ isOAuthUser }: { isOAuthUser: boolean }) {
 
 	if (!user) return;
 
+	const isFreeUser = user.subscription !== 'pro';
+
 	return (
 		<header className='bg-card fixed left-0 right-0 top-0 z-10 flex h-16 items-center justify-between border-b px-4 md:m-6 md:grid md:grid-cols-3 md:rounded-xl md:border'>
-			<Link href={ROUTE_ROOT} className='w-fit'>
-				<LogoIcon />
-			</Link>
+			<div className={cn('flex w-fit items-center gap-4', { 'gap-2': !isFreeUser })}>
+				<Link href={ROUTE_ROOT}>
+					<LogoIcon />
+				</Link>
+				{isFreeUser ? (
+					<Button variant='secondary' size='sm'>
+						<StarsIcon size={16} /> GO PRO
+						<StarsIcon size={16} />
+					</Button>
+				) : (
+					<Large>Pro</Large>
+				)}
+			</div>
 
 			<nav className='hidden justify-self-center md:inline-block'>
 				<ul className='flex flex-row gap-4'>

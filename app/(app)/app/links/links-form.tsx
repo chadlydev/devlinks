@@ -21,7 +21,7 @@ type TLinksForm = z.infer<typeof linksFormSchema>;
 
 export default function LinksForm() {
 	const router = useRouter();
-	const { links, handleChangeLinks } = useProfileContext();
+	const { links, handleChangeLinks, user } = useProfileContext();
 	const form = useForm<TLinksForm>({
 		resolver: zodResolver(linksFormSchema),
 		defaultValues: {
@@ -60,9 +60,19 @@ export default function LinksForm() {
 		return () => subscription.unsubscribe();
 	}, [watch]);
 
+	const isFreeUser = user.subscription !== 'pro';
+
+	const handleAddLink = () => {
+		if (isFreeUser && fields.length >= 5) {
+			toast.error('Upgrade to pro to add more links');
+		} else {
+			append({ platform: '', url: '' });
+		}
+	};
+
 	return (
 		<div className='flex h-full flex-grow flex-col gap-8'>
-			<Button variant='secondary' onClick={() => append({ platform: '', url: '' })}>
+			<Button variant='secondary' onClick={handleAddLink}>
 				<PlusIcon size={16} />
 				Add new link
 			</Button>
