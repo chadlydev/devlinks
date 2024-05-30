@@ -51,7 +51,7 @@ export default function Header({ isOAuthUser }: { isOAuthUser: boolean }) {
 					{navigation.map((route, i) => (
 						<li key={i}>
 							<Link
-								href={route.name === 'Preview' ? `/${user.id}` : route.href}
+								href={route.name === 'Preview' ? `/${user.url || user.id}` : route.href}
 								className={cn(
 									'hover:text-primary ring-offset-background focus-visible:ring-ring inline-flex h-10 w-full min-w-14 items-center justify-center whitespace-nowrap rounded-lg px-3 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 lg:gap-2 lg:text-sm lg:font-semibold',
 									{
