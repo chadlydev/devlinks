@@ -87,13 +87,16 @@ export async function updateProfileDetailsAction(formData: unknown) {
 
 		// Check if there is url value
 		if (url) {
-			// Check if the url is available
-			const existingUser = await db.query.userTable.findFirst({ where: eq(userTable.url, url) });
-			if (existingUser) {
-				return {
-					error: 'URL is already taken, please choose a different one',
-					type: 'url-not-available'
-				};
+			// check if the url is unchanged
+			if (url !== user.url) {
+				// Check if the url is available
+				const existingUser = await db.query.userTable.findFirst({ where: eq(userTable.url, url) });
+				if (existingUser) {
+					return {
+						error: 'URL is already taken, please choose a different one',
+						type: 'url-not-available'
+					};
+				}
 			}
 		}
 
