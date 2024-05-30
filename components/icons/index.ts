@@ -52,3 +52,4 @@ export { FreecodecampIcon } from './freecodecamp-icon';
 export { GitlabIcon } from './gitlab-icon';
 export { HashnodeIcon } from './hashnode-icon';
 export { StackoverflowIcon } from './stackoverflow-icon';
+export { StarsIcon } from './stars-icon';
