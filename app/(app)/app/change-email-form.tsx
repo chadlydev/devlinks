@@ -28,7 +28,7 @@ export default function ChangeEmailForm() {
 	if (!showVerification) {
 		return <RequestEmailChangeForm setShowVerification={setShowVerification} />;
 	}
-	return <VerifyEmailChangeForm />;
+	return <VerifyEmailChangeForm setShowVerification={setShowVerification} />;
 }
 
 type TChangeEmailForm = z.infer<typeof changeEmailFormSchema>;
@@ -116,7 +116,11 @@ function RequestEmailChangeForm({
 
 type TVerifyEmailChangeForm = z.infer<typeof verifyEmailFormSchema>;
 
-function VerifyEmailChangeForm() {
+function VerifyEmailChangeForm({
+	setShowVerification
+}: {
+	setShowVerification: (value: SetStateAction<boolean>) => void;
+}) {
 	const router = useRouter();
 
 	const form = useForm<TVerifyEmailChangeForm>({
@@ -138,6 +142,7 @@ function VerifyEmailChangeForm() {
 			reset();
 		} else if (result.success) {
 			toast.success(result.success);
+			setShowVerification(false);
 			router.refresh();
 		}
 	};
