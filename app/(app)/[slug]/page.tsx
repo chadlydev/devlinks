@@ -10,6 +10,7 @@ import { linkTable, userTable } from '@/db/schema';
 import { notFound } from 'next/navigation';
 import ShareLinkButton from '@/app/(app)/[slug]/share-link-button';
 import type { TLink } from '@/lib/types';
+import EmptyStateDialog from '@/app/(app)/[slug]/empty-state-dialog';
 
 export default async function LinksPage({ params }: { params: { slug: string } }) {
 	const { user } = await validateRequest();
@@ -30,8 +31,11 @@ export default async function LinksPage({ params }: { params: { slug: string } }
 		isAuthorizedUser = user.id === userResult.id;
 	}
 
-	const links = await db.query.linkTable.findMany({ where: eq(linkTable.userId, params.slug) });
+	const links = await db.query.linkTable.findMany({ where: eq(linkTable.userId, userResult.id) });
 
+	const showEmptyStateDialog = isAuthorizedUser && links.length === 0;
+
+	console.log(links);
 	return (
 		<div className='flex min-h-svh flex-col'>
 			{isAuthorizedUser && (
@@ -53,6 +57,7 @@ export default async function LinksPage({ params }: { params: { slug: string } }
 					}}
 				/>
 			</main>
+			{showEmptyStateDialog && <EmptyStateDialog />}
 		</div>
 	);
 }
