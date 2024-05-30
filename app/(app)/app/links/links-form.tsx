@@ -15,10 +15,12 @@ import { TLink } from '@/lib/types';
 import { linksFormSchema } from '@/lib/zod';
 import { toast } from 'sonner';
 import { updateLinksAction } from '@/app/(app)/app/links/actions';
+import { useRouter } from 'next/navigation';
 
 type TLinksForm = z.infer<typeof linksFormSchema>;
 
 export default function LinksForm() {
+	const router = useRouter();
 	const { links, handleChangeLinks } = useProfileContext();
 	const form = useForm<TLinksForm>({
 		resolver: zodResolver(linksFormSchema),
@@ -39,6 +41,7 @@ export default function LinksForm() {
 			toast.error(result.error);
 		} else if (result.success) {
 			toast.success(result.success);
+			router.refresh();
 		}
 	};
 
