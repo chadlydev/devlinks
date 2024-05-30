@@ -1,31 +1,36 @@
-import PageContent from '@/app/(app)/[userId]/page-content';
+import PageContent from '@/app/(app)/[slug]/page-content';
 import Link from 'next/link';
 import { ROUTE_LINKS } from '@/lib/constants';
 import { ArrowLeftIcon } from '@/components/icons';
 import React from 'react';
 import { validateRequest } from '@/lib/server-utils';
 import { db } from '@/db';
-import { eq } from 'drizzle-orm';
+import { eq, or } from 'drizzle-orm';
 import { linkTable, userTable } from '@/db/schema';
 import { notFound } from 'next/navigation';
-import ShareLinkButton from '@/app/(app)/[userId]/share-link-button';
+import ShareLinkButton from '@/app/(app)/[slug]/share-link-button';
 import type { TLink } from '@/lib/types';
 
-export default async function LinksPage({ params }: { params: { userId: string } }) {
+export default async function LinksPage({ params }: { params: { slug: string } }) {
 	const { user } = await validateRequest();
 
 	let isAuthorizedUser = false;
 
-	if (user) {
-		isAuthorizedUser = user.id === params.userId;
-	}
-
-	const links = await db.query.linkTable.findMany({ where: eq(linkTable.userId, params.userId) });
-	const userResult = await db.query.userTable.findFirst({ where: eq(userTable.id, params.userId) });
+	// It can be id or url, so first check this out
+	const userResult = await db.query.userTable.findFirst({
+		where: or(eq(userTable.id, params.slug), eq(userTable.url, params.slug))
+	});
 
 	if (!userResult) {
 		notFound();
 	}
+
+	// compare the id's below to set AuthorizedUser
+	if (user) {
+		isAuthorizedUser = user.id === userResult.id;
+	}
+
+	const links = await db.query.linkTable.findMany({ where: eq(linkTable.userId, params.slug) });
 
 	return (
 		<div className='flex min-h-svh flex-col'>
