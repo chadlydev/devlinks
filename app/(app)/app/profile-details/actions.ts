@@ -75,7 +75,7 @@ export async function updateProfileDetailsAction(formData: unknown) {
 		};
 	}
 
-	const { name, displayEmail } = validatedFormData.data;
+	const { name, displayEmail, url } = validatedFormData.data;
 
 	try {
 		const { user } = await validateRequest();
@@ -85,12 +85,25 @@ export async function updateProfileDetailsAction(formData: unknown) {
 			};
 		}
 
+		// Check if there is url value
+		if (url) {
+			// Check if the url is available
+			const existingUser = await db.query.userTable.findFirst({ where: eq(userTable.url, url) });
+			if (existingUser) {
+				return {
+					error: 'URL is already taken, please choose a different one',
+					type: 'url-not-available'
+				};
+			}
+		}
+
 		// Update user
 		await db
 			.update(userTable)
 			.set({
 				name,
-				displayEmail
+				displayEmail,
+				url
 			})
 			.where(eq(userTable.id, user.id));
 
