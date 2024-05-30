@@ -22,7 +22,8 @@ export const lucia = new Lucia(adapter, {
 			emailVerified: attributes.emailVerified,
 			profilePictureUrl: attributes.profilePictureUrl,
 			name: attributes.name,
-			url: attributes.url
+			url: attributes.url,
+			subscription: attributes.subscription
 		};
 	}
 });
@@ -42,4 +43,5 @@ type DatabaseUserAttributes = {
 	profilePictureUrl: string;
 	name: string;
 	url: string;
+	subscription: string;
 };

@@ -8,7 +8,8 @@ export const userTable = pgTable('user', {
 	profilePictureUrl: text('profile_picture_url'),
 	name: text('name'),
 	displayEmail: text('display_email'),
-	url: text('url').unique()
+	url: text('url').unique(),
+	subscription: text('subscription').notNull().default('free')
 });
 
 export const oauthAccountTable = pgTable('oauth_account', {
