@@ -29,8 +29,8 @@ export default function ProfileDetailsForm() {
 	const form = useForm<TProfileDetailsForm>({
 		resolver: zodResolver(profileDetailsFormSchema),
 		defaultValues: {
-			name: user.name!,
-			displayEmail: user.displayEmail!
+			name: user.name || '',
+			displayEmail: user.displayEmail || ''
 		}
 	});
 
