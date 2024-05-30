@@ -63,12 +63,13 @@ export default function LinksForm() {
 				<PlusIcon size={16} />
 				Add new link
 			</Button>
-			{!fields.length ? (
-				<EmptyState />
-			) : (
-				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-grow flex-col gap-4'>
-						<ScrollArea className='-mr-4 h-[calc(100svh-376px)] pr-4 md:h-[calc(100svh-396px)]'>
+
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-grow flex-col gap-4'>
+					<ScrollArea className='-mr-4 h-[calc(100svh-376px)] pr-4 md:h-[calc(100svh-396px)]'>
+						{!fields.length ? (
+							<EmptyState />
+						) : (
 							<ol className='flex h-max flex-col gap-4'>
 								{fields.map((field, index) => {
 									return (
@@ -82,14 +83,13 @@ export default function LinksForm() {
 									);
 								})}
 							</ol>
-						</ScrollArea>
-
-						<Button disabled={isSubmitting || !isDirty} className='mt-auto'>
-							Save
-						</Button>
-					</form>
-				</Form>
-			)}
+						)}
+					</ScrollArea>
+					<Button disabled={isSubmitting || !isDirty} className='mt-auto'>
+						Save
+					</Button>
+				</form>
+			</Form>
 		</div>
 	);
 }
