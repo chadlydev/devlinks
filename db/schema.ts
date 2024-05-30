@@ -7,7 +7,8 @@ export const userTable = pgTable('user', {
 	emailVerified: boolean('email_verified').notNull().default(false),
 	profilePictureUrl: text('profile_picture_url'),
 	name: text('name'),
-	displayEmail: text('display_email')
+	displayEmail: text('display_email'),
+	url: text('url').unique()
 });
 
 export const oauthAccountTable = pgTable('oauth_account', {
