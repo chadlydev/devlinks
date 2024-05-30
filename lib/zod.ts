@@ -49,6 +49,7 @@ export const profilePictureFormSchema = z.object({
 });
 
 export const profileDetailsFormSchema = z.object({
+	url: z.string().max(100),
 	name: z
 		.string()
 		.max(100)
