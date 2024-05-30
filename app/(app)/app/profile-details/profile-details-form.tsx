@@ -29,6 +29,7 @@ export default function ProfileDetailsForm() {
 	const form = useForm<TProfileDetailsForm>({
 		resolver: zodResolver(profileDetailsFormSchema),
 		defaultValues: {
+			url: user.url || '',
 			name: user.name || '',
 			displayEmail: user.displayEmail || ''
 		}
@@ -62,6 +63,21 @@ export default function ProfileDetailsForm() {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='bg-muted grid gap-4 rounded-lg p-4 pb-6 pt-4'
 			>
+				<FormField
+					control={form.control}
+					name='url'
+					render={({ field }) => (
+						<FormItem className='md:flex md:items-center lg:gap-8 xl:gap-2'>
+							<FormLabel className='md:min-w-60 lg:min-w-fit xl:min-w-80'>URL</FormLabel>
+							<div className='flex flex-grow flex-col gap-2'>
+								<FormControl>
+									<FormInput placeholder='devlinks.dev/[url]' {...field} />
+								</FormControl>
+								<FormMessage />
+							</div>
+						</FormItem>
+					)}
+				/>
 				<FormField
 					control={form.control}
 					name='name'
