@@ -4,7 +4,7 @@ import { userTable } from '@/db/schema';
 export type TUser = InferSelectModel<typeof userTable>;
 export type TProfileDetails = Omit<
 	TUser,
-	'hashedPassword' | 'id' | 'email' | 'emailVerified' | 'url'
+	'hashedPassword' | 'id' | 'email' | 'emailVerified' | 'url' | 'subscription'
 >;
 
 export type TPlatformValue =
