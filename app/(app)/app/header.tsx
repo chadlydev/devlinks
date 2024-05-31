@@ -5,7 +5,7 @@ import { ROUTE_LINKS, ROUTE_PROFILE_DETAILS, ROUTE_ROOT } from '@/lib/constants'
 import { LogoIcon } from '@/components/icons/logo-icon';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { AccountIcon, EyeIcon, LinkIcon, MenuIcon, StarsIcon } from '@/components/icons';
+import { AccountIcon, EyeIcon, LinkIcon, MenuIcon } from '@/components/icons';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import ThemeDropdownMenu from '@/components/theme-dropdown-menu';
 import { Large, Small } from '@/components/typography';
@@ -14,6 +14,7 @@ import { usePathname } from 'next/navigation';
 import LogoutButton from '@/app/(app)/app/logout-button';
 import { useSessionContext } from '@/contexts/session-context';
 import SettingsDialog from '@/app/(app)/app/settings-dialog';
+import GoProButton from '@/app/(app)/app/go-pro-button';
 
 const navigation = [
 	{
@@ -48,14 +49,7 @@ export default function Header({ isOAuthUser }: { isOAuthUser: boolean }) {
 				<Link href={ROUTE_ROOT}>
 					<LogoIcon />
 				</Link>
-				{isFreeUser ? (
-					<Button variant='secondary' size='sm'>
-						<StarsIcon size={16} /> GO PRO
-						<StarsIcon size={16} />
-					</Button>
-				) : (
-					<Large>Pro</Large>
-				)}
+				{isFreeUser ? <GoProButton /> : <Large>Pro</Large>}
 			</div>
 
 			<nav className='hidden justify-self-center md:inline-block'>
