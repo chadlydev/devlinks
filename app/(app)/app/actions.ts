@@ -11,10 +11,17 @@ import { changeEmailFormSchema, changePasswordFormSchema, verifyEmailFormSchema 
 import { eq, or } from 'drizzle-orm';
 import { db } from '@/db';
 import { emailVerificationTable, userTable } from '@/db/schema';
-import { EMAIL_VERIFICATION_EXPIRES_IN, EMAIL_VERIFICATION_TIMER_MS } from '@/lib/constants';
+import {
+	EMAIL_VERIFICATION_EXPIRES_IN,
+	EMAIL_VERIFICATION_TIMER_MS,
+	ROUTE_PROFILE_DETAILS
+} from '@/lib/constants';
 import { resend } from '@/emails';
 import EmailVerification from '@/emails/email-verification';
 import { isWithinExpirationDate } from 'oslo';
+import { redirect } from 'next/navigation';
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export async function logoutAction() {
 	try {
@@ -240,4 +247,30 @@ export async function verifyEmailChangeAction(formData: unknown) {
 				"The provided verification code is invalid. Please re-check and retry. If it's still not working, get-started a new code."
 		};
 	}
+}
+
+export async function createCheckoutSessionAction() {
+	const { user } = await validateRequest();
+	if (!user) {
+		return {
+			error: 'Not authorized'
+		};
+	}
+
+	const checkoutSession = await stripe.checkout.sessions.create({
+		customer_email: user.email ? user.email : undefined,
+		client_reference_id: user.id,
+		line_items: [
+			{
+				price: 'price_1PM7hTBd2AZ2TcCm9bOrRKNi',
+				quantity: 1
+			}
+		],
+		mode: 'payment',
+		success_url: `${process.env.NEXT_PUBLIC_APP_URL}${ROUTE_PROFILE_DETAILS}?payment_success=true`,
+		cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}${ROUTE_PROFILE_DETAILS}?payment_cancelled=true`
+	});
+
+	// redirect user
+	redirect(checkoutSession.url);
 }
