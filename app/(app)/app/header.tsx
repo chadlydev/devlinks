@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ROUTE_LINKS, ROUTE_PROFILE_DETAILS, ROUTE_ROOT } from '@/lib/constants';
+import { ROUTE_LINKS, ROUTE_PAYMENT, ROUTE_PROFILE_DETAILS, ROUTE_ROOT } from '@/lib/constants';
 import { LogoIcon } from '@/components/icons/logo-icon';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -14,7 +14,6 @@ import { usePathname } from 'next/navigation';
 import LogoutButton from '@/app/(app)/app/logout-button';
 import { useSessionContext } from '@/contexts/session-context';
 import SettingsDialog from '@/app/(app)/app/settings-dialog';
-import GoProButton from '@/app/(app)/app/go-pro-button';
 
 const navigation = [
 	{
@@ -49,7 +48,13 @@ export default function Header({ isOAuthUser }: { isOAuthUser: boolean }) {
 				<Link href={ROUTE_ROOT}>
 					<LogoIcon />
 				</Link>
-				{isFreeUser ? <GoProButton /> : <Large>Pro</Large>}
+				{isFreeUser ? (
+					<Button asChild variant='secondary'>
+						<Link href={ROUTE_PAYMENT}>UPGRADE TO PRO</Link>
+					</Button>
+				) : (
+					<Large>Pro</Large>
+				)}
 			</div>
 
 			<nav className='hidden justify-self-center md:inline-block'>

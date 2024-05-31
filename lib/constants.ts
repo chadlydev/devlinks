@@ -21,6 +21,7 @@ export const ROUTE_SIGN_UP = '/sign-up';
 export const ROUTE_GET_STARTED = '/get-started';
 export const ROUTE_VERIFY_EMAIL = '/verify-email';
 export const ROUTE_RESET_PASSWORD = '/reset-password';
+export const ROUTE_PAYMENT = '/payment';
 
 // --- OAuth ---
 export const GOOGLE_OAUTH_STATE_COOKIES = 'google_oauth_state';

@@ -4,19 +4,11 @@ import ProfileDetailsForm from '@/app/(app)/app/profile-details/profile-details-
 import { validateRequest } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
 import { ROUTE_GET_STARTED, ROUTE_SIGN_UP } from '@/lib/constants';
-import PaymentSuccessDialog from '@/app/(app)/app/profile-details/payment-success-dialog';
-import PaymentCancelledDialog from '@/app/(app)/app/profile-details/payment-cancelled-dialog';
 
-export default async function ProfileDetailsPage({
-	searchParams
-}: {
-	searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function ProfileDetailsPage() {
 	const { user } = await validateRequest();
 	if (!user) return redirect(ROUTE_SIGN_UP);
 	if (!user.emailVerified) return redirect(ROUTE_GET_STARTED);
-
-	console.log(searchParams);
 
 	return (
 		<main className='flex h-full flex-grow flex-col lg:ml-[504px]'>
@@ -30,8 +22,6 @@ export default async function ProfileDetailsPage({
 				<CardContent className='flex flex-col gap-6'>
 					<ProfilePictureForm />
 					<ProfileDetailsForm />
-					{searchParams.payment_success && <PaymentSuccessDialog />}
-					{searchParams.payment_cancelled && <PaymentCancelledDialog />}
 				</CardContent>
 			</Card>
 		</main>

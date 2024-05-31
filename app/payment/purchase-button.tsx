@@ -1,12 +1,13 @@
 'use client';
 
-import { StarsIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useTransition } from 'react';
-import { createCheckoutSessionAction } from '@/app/(app)/app/actions';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+import { createCheckoutSessionAction } from '@/app/payment/actions';
 
-export default function GoProButton() {
+export default function PurchaseButton() {
+	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 
 	const handleClick = () => {
@@ -15,14 +16,15 @@ export default function GoProButton() {
 
 			if (result.error) {
 				toast.error(result.error);
+			} else {
+				router.refresh();
 			}
 		});
 	};
 
 	return (
-		<Button onClick={handleClick} disabled={isPending} variant='secondary' size='sm'>
-			<StarsIcon size={16} /> GO PRO
-			<StarsIcon size={16} />
+		<Button onClick={handleClick} disabled={isPending} size='lg'>
+			Buy lifetime access for $29
 		</Button>
 	);
 }
