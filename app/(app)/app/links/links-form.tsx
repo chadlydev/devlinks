@@ -21,6 +21,7 @@ import {
 	DragOverEvent,
 	DragStartEvent,
 	KeyboardSensor,
+	MouseSensor,
 	TouchSensor,
 	UniqueIdentifier,
 	useSensor,
@@ -111,17 +112,20 @@ export default function LinksForm() {
 		setActiveId(null);
 	};
 
-	const touchSensor = useSensor(TouchSensor, {
-		// Press delay of 250ms, with tolerance of 5px of movement
-		activationConstraint: {
-			delay: 250,
-			tolerance: 5
-		}
-	});
-
 	const sensors = useSensors(
-		// useSensor(PointerSensor),
-		touchSensor,
+		useSensor(MouseSensor, {
+			// Require the mouse to move by 10 pixels before activating
+			activationConstraint: {
+				distance: 5
+			}
+		}),
+		useSensor(TouchSensor, {
+			// Press delay of 250ms, with tolerance of 5px of movement
+			activationConstraint: {
+				delay: 250,
+				tolerance: 5
+			}
+		}),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates
 		})
