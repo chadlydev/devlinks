@@ -49,8 +49,7 @@ const features = [
 	},
 	{
 		name: 'Payments',
-		description:
-			'Comprehensive support for handling payments and managing subscriptions effortlessly with Stripe.',
+		description: 'Comprehensive support for handling payments effortlessly with Stripe.',
 		icon: <StripeIcon size={36} />
 	}
 ];
@@ -82,8 +81,8 @@ export default function MarketingPage() {
 			</section>
 
 			{/* FEATURES SECTION */}
-			<section className='bg-background/60 relative py-32' id='features'>
-				<GridBackground className='dark:bg-grid-white/[0.2] bg-grid-black/[0.2]' />
+			<section className='relative bg-background/60 py-32' id='features'>
+				<GridBackground className='bg-grid-black/[0.2] dark:bg-grid-white/[0.2]' />
 				<div className='container flex flex-col gap-6 px-4 text-center md:px-8'>
 					<div className='mx-auto max-w-3xl'>
 						<H2>Techstack</H2>
@@ -97,7 +96,7 @@ export default function MarketingPage() {
 						{features.map((feature, i) => (
 							<Card
 								key={i}
-								className='bg-background relative overflow-clip rounded-lg border p-2 text-left'
+								className='relative overflow-clip rounded-lg border bg-background p-2 text-left'
 							>
 								<CardContent className='flex max-h-[220px] w-full flex-col gap-4 rounded-md p-6'>
 									{feature.icon}
