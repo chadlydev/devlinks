@@ -9,6 +9,12 @@ import { passwordResetTokenTable } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { isWithinExpirationDate } from 'oslo';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'devlinks - Reset Password'
+};
+
 export default async function PasswordResetPage({
 	params
 }: {

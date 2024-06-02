@@ -5,6 +5,11 @@ import { ArrowLeftIcon } from '@/components/icons';
 import Link from '@/components/link';
 import { validateRequest } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'devlinks - Request Password Reset'
+};
 
 export default async function RequestPasswordResetPage() {
 	const { user } = await validateRequest();

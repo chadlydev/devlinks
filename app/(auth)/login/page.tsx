@@ -14,6 +14,11 @@ import Separator from '@/components/separator';
 import { validateRequest } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
 import OAuthButton from '@/app/(auth)/oauth-button';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'devlinks - Login'
+};
 
 export default async function LoginPage() {
 	const { user } = await validateRequest();

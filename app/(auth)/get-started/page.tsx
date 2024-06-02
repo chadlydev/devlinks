@@ -7,6 +7,11 @@ import { redirect } from 'next/navigation';
 import CancelSignUpButton from '@/app/(auth)/get-started/cancel-sign-up-button';
 import RequestEmailVerificationButton from '@/app/(auth)/get-started/request-email-verification-button';
 import RequestEmailChangeForm from '@/app/(auth)/get-started/request-email-change-form';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'devlinks - Get Started!'
+};
 
 export default async function GetStartedPage() {
 	const { user } = await validateRequest();

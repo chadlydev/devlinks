@@ -4,6 +4,12 @@ import { validateRequest } from '@/lib/server-utils';
 import { ROUTE_SIGN_UP } from '@/lib/constants';
 import { redirect } from 'next/navigation';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'devlinks - Verify Email'
+};
+
 export default async function VerifyEmailPage() {
 	const { user } = await validateRequest();
 	if (!user) return redirect(ROUTE_SIGN_UP);

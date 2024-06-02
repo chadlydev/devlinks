@@ -3,6 +3,11 @@ import LinksForm from '@/app/(app)/app/links/links-form';
 import { validateRequest } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
 import { ROUTE_GET_STARTED, ROUTE_SIGN_UP } from '@/lib/constants';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'devlinks - Links'
+};
 
 export default async function LinksPage() {
 	const { user } = await validateRequest();

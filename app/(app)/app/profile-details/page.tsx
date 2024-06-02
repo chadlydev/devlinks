@@ -4,6 +4,11 @@ import ProfileDetailsForm from '@/app/(app)/app/profile-details/profile-details-
 import { validateRequest } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
 import { ROUTE_GET_STARTED, ROUTE_SIGN_UP } from '@/lib/constants';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'devlinks - Profile Details'
+};
 
 export default async function ProfileDetailsPage() {
 	const { user } = await validateRequest();
