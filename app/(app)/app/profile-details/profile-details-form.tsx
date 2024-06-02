@@ -20,11 +20,13 @@ import { TUser } from '@/lib/types';
 import { profileDetailsFormSchema } from '@/lib/zod';
 import { toast } from 'sonner';
 import { updateProfileDetailsAction } from '@/app/(app)/app/profile-details/actions';
+import { useRouter } from 'next/navigation';
 
 export type TProfileDetailsForm = z.infer<typeof profileDetailsFormSchema>;
 
 export default function ProfileDetailsForm() {
 	const { user, handleChangeUserDetails } = useProfileContext();
+	const router = useRouter();
 
 	const form = useForm<TProfileDetailsForm>({
 		resolver: zodResolver(profileDetailsFormSchema),
@@ -46,6 +48,7 @@ export default function ProfileDetailsForm() {
 			toast.error(result.error);
 		} else if (result.success) {
 			toast.success(result.success);
+			router.refresh();
 		}
 	};
 
@@ -63,7 +66,7 @@ export default function ProfileDetailsForm() {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='bg-muted grid gap-4 rounded-lg p-4 pb-6 pt-4'
+				className='grid gap-4 rounded-lg bg-muted p-4 pb-6 pt-4'
 			>
 				<FormField
 					control={form.control}
