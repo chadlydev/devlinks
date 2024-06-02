@@ -10,13 +10,7 @@ import {
 } from '@/components/ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
-import {
-	CheckIcon,
-	ChevronDownIcon,
-	ChevronsUpDownIcon,
-	ChevronUpIcon,
-	TrashIcon
-} from '@/components/icons';
+import { CheckIcon, ChevronsUpDownIcon, GripVerticalIcon, TrashIcon } from '@/components/icons';
 import {
 	Command,
 	CommandEmpty,
@@ -28,6 +22,8 @@ import {
 import { UseFieldArrayReturn, UseFormReturn } from 'react-hook-form';
 import { useState } from 'react';
 import { TPlatformSelectItem } from '@/lib/types';
+import { CSS } from '@dnd-kit/utilities';
+import { useSortable } from '@dnd-kit/sortable';
 
 export const platformItemList: TPlatformSelectItem[] = [
 	{ value: 'github', label: 'GitHub' },
@@ -54,16 +50,25 @@ type LinkItemProps = {
 export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps) {
 	const [open, setOpen] = useState(false);
 
-	const handleMoveUp = (index: number) => {
-		fieldArray.swap(index, index - 1);
-	};
+	const { attributes, listeners, setNodeRef, transform, transition, setActivatorNodeRef } =
+		useSortable({
+			id
+		});
 
-	const handleMoveDown = (index: number) => {
-		fieldArray.swap(index, index + 1);
-	};
+	const style = transform
+		? {
+				transform: CSS.Translate.toString(transform),
+				transition
+			}
+		: undefined;
 
 	return (
-		<li key={id} className={cn('bg-muted flex gap-4 rounded-lg p-4 pb-6 pt-4')}>
+		<li
+			ref={setNodeRef}
+			style={style}
+			key={id}
+			className={cn('flex gap-4 rounded-lg bg-muted p-4 pb-6 pt-4')}
+		>
 			<div className='flex flex-grow flex-col gap-4'>
 				<div className='flex items-center justify-between'>
 					<Large>Link #{index + 1}</Large>
@@ -140,24 +145,14 @@ export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps)
 				/>
 			</div>
 			<div className='flex flex-col gap-4'>
-				<Button
-					type='button'
-					size='icon'
-					variant='outline'
-					disabled={index === 0}
-					onClick={() => handleMoveUp(index)}
+				<div
+					{...attributes}
+					{...listeners}
+					ref={setActivatorNodeRef}
+					className='flex size-10 items-center justify-center'
 				>
-					<ChevronUpIcon size={16} />
-				</Button>
-				<Button
-					type='button'
-					size='icon'
-					variant='outline'
-					disabled={index + 1 >= fieldArray.fields.length}
-					onClick={() => handleMoveDown(index)}
-				>
-					<ChevronDownIcon size={16} />
-				</Button>
+					<GripVerticalIcon size={20} />
+				</div>
 				<Button
 					type='button'
 					size='icon'
