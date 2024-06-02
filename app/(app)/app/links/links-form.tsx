@@ -7,7 +7,6 @@ import { z } from 'zod';
 import { Form } from '@/components/ui/form';
 import { PlusIcon } from '@/components/icons';
 import EmptyState from '@/app/(app)/app/links/empty-state';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import LinkItem from '@/app/(app)/app/links/link-item';
 import { useProfileContext } from '@/contexts/profile-context';
 import { useEffect, useState } from 'react';
@@ -20,10 +19,9 @@ import {
 	closestCenter,
 	DndContext,
 	DragOverEvent,
-	DragOverlay,
 	DragStartEvent,
 	KeyboardSensor,
-	MouseSensor,
+	PointerSensor,
 	TouchSensor,
 	UniqueIdentifier,
 	useSensor,
@@ -34,12 +32,7 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates
 } from '@dnd-kit/sortable';
-import {
-	createSnapModifier,
-	restrictToParentElement,
-	restrictToVerticalAxis
-} from '@dnd-kit/modifiers';
-import { Skeleton } from '@/components/ui/skeleton';
+import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 
 type TLinksForm = z.infer<typeof linksFormSchema>;
 
@@ -119,12 +112,6 @@ export default function LinksForm() {
 		setActiveId(null);
 	};
 
-	const mouseSensor = useSensor(MouseSensor, {
-		// Require the mouse to move by 10 pixels before activating
-		activationConstraint: {
-			distance: 10
-		}
-	});
 	const touchSensor = useSensor(TouchSensor, {
 		// Press delay of 250ms, with tolerance of 5px of movement
 		activationConstraint: {
@@ -134,14 +121,12 @@ export default function LinksForm() {
 	});
 
 	const sensors = useSensors(
-		mouseSensor,
+		useSensor(PointerSensor),
 		touchSensor,
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates
 		})
 	);
-
-	const snapToGridModifier = createSnapModifier(240);
 
 	return (
 		<div className='flex h-full flex-grow flex-col gap-8'>
@@ -152,41 +137,35 @@ export default function LinksForm() {
 
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-grow flex-col gap-4'>
-					<ScrollArea className='-mr-4 h-[calc(100svh-376px)] overflow-x-clip pr-4 md:h-[calc(100svh-396px)]'>
-						{!fields.length ? (
-							<EmptyState />
-						) : (
-							<ol className='flex flex-col gap-4'>
-								<DndContext
-									collisionDetection={closestCenter}
-									onDragStart={handleDragStart}
-									onDragOver={handleDragOver}
-									onDragEnd={handleDragEnd}
-									sensors={sensors}
-									modifiers={[restrictToVerticalAxis, restrictToParentElement, snapToGridModifier]}
-								>
-									<SortableContext items={fields} strategy={horizontalListSortingStrategy}>
-										{fields.map((field, index) => {
-											return (
-												<LinkItem
-													key={field.id}
-													id={field.id}
-													index={index}
-													form={form}
-													fieldArray={fieldArray}
-												/>
-											);
-										})}
-									</SortableContext>
-									<DragOverlay>
-										{activeId ? (
-											<Skeleton className='h-[224px] w-full animate-none opacity-50' />
-										) : null}
-									</DragOverlay>
-								</DndContext>
-							</ol>
-						)}
-					</ScrollArea>
+					{!fields.length ? (
+						<EmptyState />
+					) : (
+						<ol className='flex flex-col gap-4'>
+							<DndContext
+								collisionDetection={closestCenter}
+								onDragStart={handleDragStart}
+								onDragOver={handleDragOver}
+								onDragEnd={handleDragEnd}
+								sensors={sensors}
+								modifiers={[restrictToVerticalAxis, restrictToParentElement]}
+							>
+								<SortableContext items={fields} strategy={horizontalListSortingStrategy}>
+									{fields.map((field, index) => {
+										return (
+											<LinkItem
+												key={field.id}
+												id={field.id}
+												activeId={activeId}
+												index={index}
+												form={form}
+												fieldArray={fieldArray}
+											/>
+										);
+									})}
+								</SortableContext>
+							</DndContext>
+						</ol>
+					)}
 					<Button disabled={isSubmitting || !isDirty} className='mt-auto'>
 						Save
 					</Button>

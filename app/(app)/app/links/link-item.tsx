@@ -24,6 +24,7 @@ import { useState } from 'react';
 import { TPlatformSelectItem } from '@/lib/types';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable } from '@dnd-kit/sortable';
+import { UniqueIdentifier } from '@dnd-kit/core';
 
 export const platformItemList: TPlatformSelectItem[] = [
 	{ value: 'github', label: 'GitHub' },
@@ -42,12 +43,13 @@ export const platformItemList: TPlatformSelectItem[] = [
 
 type LinkItemProps = {
 	id: string;
+	activeId: UniqueIdentifier | null;
 	index: number;
 	form: UseFormReturn<{ links: { platform: string; url: string }[] }, any, undefined>;
 	fieldArray: UseFieldArrayReturn<{ links: { platform: string; url: string }[] }, 'links', 'id'>;
 };
 
-export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps) {
+export default function LinkItem({ id, index, form, activeId, fieldArray }: LinkItemProps) {
 	const [open, setOpen] = useState(false);
 
 	const { attributes, listeners, setNodeRef, transform, transition, setActivatorNodeRef } =
@@ -67,7 +69,9 @@ export default function LinkItem({ id, index, form, fieldArray }: LinkItemProps)
 			ref={setNodeRef}
 			style={style}
 			key={id}
-			className={cn('flex gap-4 rounded-lg bg-muted p-4 pb-6 pt-4')}
+			className={cn('flex gap-4 rounded-lg bg-muted p-4 pb-6 pt-4', {
+				'rounded-2xl border-8 border-card opacity-50': activeId === id
+			})}
 		>
 			<div className='flex flex-grow flex-col gap-4'>
 				<div className='flex items-center justify-between'>
