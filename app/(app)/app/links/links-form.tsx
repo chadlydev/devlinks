@@ -67,7 +67,7 @@ export default function LinksForm() {
 		control
 	});
 
-	const { append, fields, swap, move } = fieldArray;
+	const { append, fields, swap } = fieldArray;
 
 	useEffect(() => {
 		const subscription = watch(({ links }) => {
