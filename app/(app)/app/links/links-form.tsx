@@ -21,7 +21,6 @@ import {
 	DragOverEvent,
 	DragStartEvent,
 	KeyboardSensor,
-	PointerSensor,
 	TouchSensor,
 	UniqueIdentifier,
 	useSensor,
@@ -121,7 +120,7 @@ export default function LinksForm() {
 	});
 
 	const sensors = useSensors(
-		useSensor(PointerSensor),
+		// useSensor(PointerSensor),
 		touchSensor,
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates

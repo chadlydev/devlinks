@@ -69,7 +69,7 @@ export default function LinkItem({ id, index, form, activeId, fieldArray }: Link
 			ref={setNodeRef}
 			style={style}
 			key={id}
-			className={cn('flex gap-4 rounded-lg bg-muted p-4 pb-6 pt-4', {
+			className={cn('flex touch-manipulation gap-4 rounded-lg bg-muted p-4 pb-6 pt-4', {
 				'rounded-2xl border-8 border-card opacity-50': activeId === id
 			})}
 		>
