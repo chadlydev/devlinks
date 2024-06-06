@@ -72,7 +72,7 @@ export default function MarketingPage() {
 							<Link href={ROUTE_SIGN_UP}>Get Started</Link>
 						</Button>
 						<Button asChild variant='outline'>
-							<Link href='https://github.com/chadlydev' target='_blank'>
+							<Link href='https://github.com/chadlydev/devlinks' target='_blank'>
 								GitHub
 							</Link>
 						</Button>

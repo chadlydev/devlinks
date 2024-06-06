@@ -16,21 +16,13 @@ export default function Footer() {
 				>
 					chadlydev
 				</Link>
-				. Inspired by{' '}
-				<Link
-					href='https://github.com/shadcn'
-					target='_blank'
-					className='underline underline-offset-4'
-				>
-					shadcn
-				</Link>
 				. Hosted on{' '}
 				<Link href='https://vercel.com/' target='_blank' className='underline underline-offset-4'>
 					Vercel
 				</Link>
 				. The source code is available on{' '}
 				<Link
-					href='https://github.com/chadlydev'
+					href='https://github.com/chadlydev/devlinks'
 					target='_blank'
 					className='underline underline-offset-4'
 				>
